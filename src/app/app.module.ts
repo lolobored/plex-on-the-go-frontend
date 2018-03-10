@@ -25,6 +25,7 @@ import {NavBarModule} from './shared/navbar/navbar.component';
 import {ThemePickerModule} from './shared/theme-picker';
 import {ThemeStorage} from './shared/theme-picker/theme-storage/theme-storage';
 import {StyleManager} from './shared/style-manager';
+import {ComponentPageTitle} from './shared/page-title/page-title';
 
 
 
@@ -65,7 +66,8 @@ import {StyleManager} from './shared/style-manager';
   ],
   providers: [MoviesService,
     StyleManager,
-    ThemeStorage],
+    ThemeStorage,
+    ComponentPageTitle],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

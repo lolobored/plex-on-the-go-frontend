@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
+import {Component, ViewEncapsulation} from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
 import {filter} from 'rxjs/operators/filter';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class AppComponent {
   constructor(router: Router) {
