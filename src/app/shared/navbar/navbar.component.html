@@ -1,0 +1,48 @@
+<!-- TODO: figure out if the <nav> should go inside of a <header> element. -->
+<nav class="docs-navbar-header">
+  <a mat-button class="docs-button" routerLink="/" aria-label="Angular Material">
+    <!--<img class="docs-angular-logo"
+         src="../../../assets/img/homepage/angular-white-transparent.svg"
+         alt="angular">-->
+    <span>Material</span>
+  </a>
+  <a mat-button class="docs-navbar-hide-small docs-button" routerLink="movies">
+    <mat-icon>movie</mat-icon>
+    <span>Movies</span>
+  </a>
+  <a mat-button class="docs-navbar-hide-small docs-button" routerLink="tvshows">
+    <mat-icon>tv</mat-icon>
+    <span>TV Shows</span>
+  </a>
+  <a mat-button class="docs-navbar-hide-small docs-button" routerLink="downloads">
+    <mat-icon>cloud download</mat-icon>
+    <span>Downloads</span>
+  </a>
+  <a mat-button class="docs-navbar-hide-small docs-button" routerLink="sync">
+    <mat-icon>sync</mat-icon>
+    <span>Sync</span>
+  </a>
+  <a mat-button class="docs-navbar-hide-small docs-button" routerLink="settings">
+    <mat-icon>settings</mat-icon>
+    <span>Settings</span>
+  </a>
+  <div class="flex-spacer"></div>
+
+  <theme-picker></theme-picker>
+  <a mat-button class="docs-button docs-navbar-hide-small" href="https://github.com/lolobored/plex-on-the-go-frontend"
+     aria-label="GitHub Repository">
+      <img class="docs-angular-logo"
+           src="../../../assets/img/homepage/github-circle-white-transparent.svg"
+           alt="angular">
+      GitHub
+    </a>
+    <a mat-icon-button class="docs-button docs-navbar-show-small"
+       href="https://github.com/lolobored/plex-on-the-go-frontend" aria-label="GitHub Repository">
+       <img class="docs-angular-logo"
+             src="../../../assets/img/homepage/github-circle-white-transparent.svg"
+             alt="angular">
+      </a>
+    </nav>
+    <nav class="docs-navbar docs-navbar-show-small">
+      <a mat-button class="docs-navbar-link" routerLink="guides">Guides</a>
+    </nav>

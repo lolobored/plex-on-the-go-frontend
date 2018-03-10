@@ -1,0 +1,6 @@
+<div class="example-container">
+  <mat-form-field>
+    <input matInput placeholder="Enter your email" [formControl]="elasticSearchUrl" required>
+    <mat-error *ngIf="elasticSearchUrl.invalid">{{getErrorMessage()}}</mat-error>
+  </mat-form-field>
+</div>

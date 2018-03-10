@@ -6,7 +6,10 @@ import {LoginComponent} from "./components/login/login.component";
 
 const routes: Routes = [
   { path: 'movies', component: MoviesComponent },
-  { path: 'login', component: LoginComponent }
+  { path: 'tvshows', component: MoviesComponent },
+  { path: 'downloads', component: MoviesComponent },
+  { path: 'sync', component: MoviesComponent },
+  { path: 'settings', component: MoviesComponent }
 ];
 
 @NgModule({
