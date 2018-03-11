@@ -5,10 +5,10 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing.module';
-import {HttpClientModule} from "@angular/common/http";
+import {HttpClientModule} from '@angular/common/http';
 
 import { MoviesComponent } from './components/movies/movies.component';
-import {MoviesService} from "./components/movies/movies.service";
+import {MoviesService} from './components/movies/movies.service';
 import { MoviesTableComponent } from './components/movies/movies-table/movies-table.component';
 
 import {

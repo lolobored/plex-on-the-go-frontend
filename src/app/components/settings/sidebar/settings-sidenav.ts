@@ -2,7 +2,6 @@ import {
   Component, Input, NgZone, ViewEncapsulation, ViewChild, OnInit, NgModule, trigger, state,
   animate, transition, style, OnDestroy
 } from '@angular/core';
-import {DocumentationItems} from '../settings-items/settings-items';
 import {MatSidenav, MatSidenavModule, MatIconModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ActivatedRoute, Params, Router, RouterModule} from '@angular/router';
@@ -10,6 +9,12 @@ import {CommonModule} from '@angular/common';
 import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
 import {SettingsHeaderModule} from '../settings-page-header/settings-page-header';
+
+import {switchMap} from 'rxjs/operators/switchMap';
+import {takeUntil} from 'rxjs/operators/takeUntil';
+import {startWith} from 'rxjs/operators/startWith';
+import {combineLatest} from 'rxjs/observable/combineLatest';
+import {log} from 'util';
 
 const SMALL_WIDTH_BREAKPOINT = 720;
 
@@ -21,6 +26,7 @@ const SMALL_WIDTH_BREAKPOINT = 720;
 })
 export class SettingsSidenav implements OnInit {
   private mediaMatcher: MediaQueryList = matchMedia(`(max-width: ${SMALL_WIDTH_BREAKPOINT}px)`);
+  params: Observable<Params>;
 
   constructor(private _route: ActivatedRoute,
               private _router: Router,
@@ -41,6 +47,7 @@ export class SettingsSidenav implements OnInit {
   isScreenSmall(): boolean {
     return this.mediaMatcher.matches;
   }
+
 }
 
 @Component({
@@ -61,10 +68,15 @@ export class SettingsNav implements OnInit, OnDestroy {
   private _onDestroy = new Subject<void>();
   category: string;
 
-  constructor(private _router: Router) { }
+  constructor(private _router: Router) {
+
+  }
 
   ngOnInit() {
+
   }
+
+
 
   ngOnDestroy() {
     this._onDestroy.next();
@@ -79,6 +91,9 @@ export class SettingsNav implements OnInit, OnDestroy {
 
   /** Toggles the expanded state */
   toggleExpand(category: string) {
+  if (typeof this.expansions[category] === 'undefined') {
+      this.expansions[category] = false;
+    }
     this.expansions[category] = !this.expansions[category];
   }
 
@@ -101,6 +116,6 @@ export class SettingsNav implements OnInit, OnDestroy {
   ],
   exports: [SettingsSidenav],
   declarations: [SettingsSidenav, SettingsNav],
-  providers: [DocumentationItems],
+  providers: [],
 })
 export class SettingsSidenavModule {}
