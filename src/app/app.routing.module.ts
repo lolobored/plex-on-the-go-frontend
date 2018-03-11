@@ -5,6 +5,7 @@ import { MoviesComponent } from './components/movies/movies.component';
 import {SettingsComponent} from './components/settings/settings.component';
 import {SettingsSidenav} from './components/settings/sidebar/settings-sidenav';
 import {ElasticsearchComponent} from './components/settings/elasticsearch/elasticsearch.component';
+import {PlexComponent} from './components/settings/plex/plex.component';
 
 const routes: Routes = [
   { path: 'movies', component: MoviesComponent },
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'sync', component: MoviesComponent },
   { path: 'settings', component: SettingsComponent,
     children: [
+      {path: 'plex', component: PlexComponent},
       {path: 'plex-on-the-go', component: ElasticsearchComponent},
       {path: 'elasticsearch', component: ElasticsearchComponent}
     ]}

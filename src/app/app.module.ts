@@ -27,6 +27,7 @@ import {ThemeStorage} from './shared/theme-picker/theme-storage/theme-storage';
 import {StyleManager} from './shared/style-manager';
 import {ComponentPageTitle} from './shared/page-title/page-title';
 import {SettingsSidenavModule} from './components/settings/sidebar/settings-sidenav';
+import { PlexComponent } from './components/settings/plex/plex.component';
 
 
 
@@ -39,7 +40,8 @@ import {SettingsSidenavModule} from './components/settings/sidebar/settings-side
     UserComponent,
     MainMenuComponent,
     SettingsComponent,
-    ElasticsearchComponent
+    ElasticsearchComponent,
+    PlexComponent
   ],
   imports: [
     BrowserModule,
