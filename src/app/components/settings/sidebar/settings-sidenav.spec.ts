@@ -35,12 +35,5 @@ describe('SettingsSidenav', () => {
     const component = fixture.componentInstance;
 
     fixture.detectChanges();
-
-    const totalItems = component.docItems.getItems('categories').length;
-    const totalLinks = fixture
-      .nativeElement
-      .querySelectorAll('.docs-settings-viewer-sidenav li a')
-      .length;
-    expect(totalLinks).toEqual(totalItems);
   });
 });

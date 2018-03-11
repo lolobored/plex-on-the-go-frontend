@@ -9,12 +9,7 @@ import {ActivatedRoute, Params, Router, RouterModule} from '@angular/router';
 import {CommonModule} from '@angular/common';
 import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
-import {switchMap} from 'rxjs/operators/switchMap';
-import {takeUntil} from 'rxjs/operators/takeUntil';
-import {startWith} from 'rxjs/operators/startWith';
-import {combineLatest} from 'rxjs/observable/combineLatest';
 import {SettingsHeaderModule} from '../settings-page-header/settings-page-header';
-
 
 const SMALL_WIDTH_BREAKPOINT = 720;
 
@@ -27,10 +22,7 @@ const SMALL_WIDTH_BREAKPOINT = 720;
 export class SettingsSidenav implements OnInit {
   private mediaMatcher: MediaQueryList = matchMedia(`(max-width: ${SMALL_WIDTH_BREAKPOINT}px)`);
 
-  params: Observable<Params>;
-
-  constructor(public docItems: DocumentationItems,
-              private _route: ActivatedRoute,
+  constructor(private _route: ActivatedRoute,
               private _router: Router,
               zone: NgZone) {
     this.mediaMatcher.addListener(mql => zone.run(() => this.mediaMatcher = mql));
@@ -44,11 +36,6 @@ export class SettingsSidenav implements OnInit {
         this.sidenav.close();
       }
     });
-
-    // Combine params from all of the path into a single object.
-    this.params = combineLatest(
-      this._route.pathFromRoot.map(route => route.params),
-      Object.assign);
   }
 
   isScreenSmall(): boolean {
@@ -72,16 +59,11 @@ export class SettingsNav implements OnInit, OnDestroy {
   @Input() params: Observable<Params>;
   expansions = {};
   private _onDestroy = new Subject<void>();
+  category: string;
 
-  constructor(public docItems: DocumentationItems,
-              private _router: Router) { }
+  constructor(private _router: Router) { }
 
   ngOnInit() {
-    this._router.events.pipe(
-      startWith(null),
-      switchMap(() => this.params),
-      takeUntil(this._onDestroy)
-    ).subscribe(p => this.setExpansions(p));
   }
 
   ngOnDestroy() {
@@ -89,24 +71,6 @@ export class SettingsNav implements OnInit, OnDestroy {
     this._onDestroy.complete();
   }
 
-  /** Set the expansions based on the route url */
-  setExpansions(params: Params) {
-    const categories = this.docItems.getCategories(params.section);
-    for (const category of categories) {
-      if (this.expansions[category.id] === true) {
-        continue;
-      }
-
-      let match = false;
-      for (const item of category.items) {
-        if (this._router.url.indexOf(item.id) > -1) {
-          match = true;
-          break;
-        }
-      }
-      this.expansions[category.id] = match;
-    }
-  }
 
   /** Gets the expanded state */
   _getExpandedState(category: string) {
