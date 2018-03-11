@@ -1,13 +1,13 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-import {ComponentHeaderModule, SettingsPageHeader} from './settings-page-header';
+import {SettingsHeaderModule, SettingsPageHeader} from './settings-page-header';
 
 
-describe('ComponentPageHeader', () => {
+describe('SettingsPageHeader', () => {
   let fixture: ComponentFixture<SettingsPageHeader>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ComponentHeaderModule],
+      imports: [SettingsHeaderModule],
     }).compileComponents();
   }));
 
