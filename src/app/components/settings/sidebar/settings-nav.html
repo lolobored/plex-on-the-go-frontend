@@ -1,0 +1,55 @@
+<div class="docs-component-viewer-nav">
+  <div class="docs-component-viewer-nav-content">
+    <button (click)="toggleExpand('users')"
+            [attr.aria-label]="'users, section toggle'"
+            [attr.aria-controls]="'panel-users'"
+            [attr.aria-expanded]="getExpanded('users')">
+      Settings
+      <mat-icon >account_circle</mat-icon>
+    </button>
+    <ul [@bodyExpansion]="_getExpandedState('users')" id="panel-users">
+      <li>
+        <a [routerLink]="'/movies'"
+           routerLinkActive="docs-component-viewer-sidenav-item-selected">
+          Users
+        </a>
+      </li>
+      <li>
+        <a [routerLink]="'/movies'"
+           routerLinkActive="docs-component-viewer-sidenav-item-selected">
+          Connectivity
+        </a>
+      </li>
+    </ul>
+    <hr>
+    <button (click)="toggleExpand('backends')"
+            [attr.aria-label]="'backends, section toggle'"
+            [attr.aria-controls]="'panel-backends'"
+            [attr.aria-expanded]="getExpanded('backends')">
+      Backends
+      <mat-icon *ngIf="!getExpanded('backends')">cast_connected</mat-icon>
+      <mat-icon *ngIf="getExpanded('backends')">cast_connected</mat-icon>
+    </button>
+    <ul [@bodyExpansion]="_getExpandedState('backends')" id="panel-backends">
+      <li>
+        <a [routerLink]="'/movies'"
+           routerLinkActive="docs-component-viewer-sidenav-item-selected">
+          Plex
+        </a>
+      </li>
+      <li>
+        <a [routerLink]="'/movies'"
+           routerLinkActive="docs-component-viewer-sidenav-item-selected">
+          Plex On The Go
+        </a>
+      </li>
+      <li>
+        <a [routerLink]="'/movies'"
+           routerLinkActive="docs-component-viewer-sidenav-item-selected">
+          Elastic Search
+        </a>
+      </li>
+    </ul>
+    <hr>
+  </div>
+</div>

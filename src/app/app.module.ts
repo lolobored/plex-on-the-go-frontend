@@ -13,12 +13,12 @@ import { MoviesTableComponent } from './components/movies/movies-table/movies-ta
 
 import {
   MatPaginatorModule, MatTableModule, MatInputModule, MatSlideToggleModule, MatGridListModule,
-  MatIconModule, MatMenuModule, MatToolbarModule, MatCardModule, MatButtonModule, MatTabsModule, MatExpansionModule
+  MatIconModule, MatMenuModule, MatToolbarModule, MatCardModule, MatButtonModule, MatTabsModule, MatExpansionModule, MatSidenavModule
 } from '@angular/material';
 import { LoginComponent } from './components/login/login.component';
 import { UserComponent } from './components/login/user/user.component';
 import { MainMenuComponent } from './components/main-menu/main-menu.component';
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { SettingsComponent } from './components/settings/settings.component';
 import { ElasticsearchComponent } from './components/settings/elasticsearch/elasticsearch.component';
 import {NavBarModule} from './shared/navbar/navbar.component';
@@ -26,6 +26,7 @@ import {ThemePickerModule} from './shared/theme-picker';
 import {ThemeStorage} from './shared/theme-picker/theme-storage/theme-storage';
 import {StyleManager} from './shared/style-manager';
 import {ComponentPageTitle} from './shared/page-title/page-title';
+import {SettingsSidenavModule} from './components/settings/sidebar/settings-sidenav';
 
 
 
@@ -58,11 +59,13 @@ import {ComponentPageTitle} from './shared/page-title/page-title';
     MatIconModule,
     MatCardModule,
     MatTabsModule,
+    MatSidenavModule,
     BrowserAnimationsModule,
     MatExpansionModule,
     ReactiveFormsModule,
     NavBarModule,
-    ThemePickerModule
+    ThemePickerModule,
+    SettingsSidenavModule
   ],
   providers: [MoviesService,
     StyleManager,

@@ -2,6 +2,7 @@ import {Component, NgModule, OnInit} from '@angular/core';
 import {ComponentPageTitle} from '../../shared/page-title/page-title';
 import {CommonModule} from '@angular/common';
 import {RouterModule} from '@angular/router';
+import {SettingsSidenav} from './sidebar/settings-sidenav';
 
 @Component({
   selector: 'app-settings',
@@ -23,7 +24,7 @@ export class SettingsComponent implements OnInit {
 
 
 @NgModule({
-  imports: [RouterModule, CommonModule],
+  imports: [RouterModule, CommonModule, SettingsSidenav],
   exports: [SettingsComponent],
   declarations: [SettingsComponent],
   providers: [ComponentPageTitle],
