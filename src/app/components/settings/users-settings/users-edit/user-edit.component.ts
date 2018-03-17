@@ -65,7 +65,7 @@ export class UserEditComponent implements OnInit {
       this.user = new User();
       this.editMode = false;
     } else {
-      this.userService.getUser(res.id).subscribe(user => this.user = user);
+      this.userService.getUser(res.id).subscribe((user: User) => this.user = user);
       this.editMode = true;
     }
   }

@@ -5,6 +5,7 @@ import {User} from '../../../shared/models/user';
 import {ErrorObservable} from 'rxjs/observable/ErrorObservable';
 import {IError} from 'protractor/built/exitCodes';
 import 'rxjs/add/operator/map'
+import {Subscriber} from 'rxjs/Subscriber';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -22,7 +23,7 @@ export class UsersService {
     return this.http.get(this.usersUrl);
   }
 
-  public getUser(id: number){
+  public getUser(id: number) {
     return this.http.get(this.usersUrl + '/' + id);
   }
 
