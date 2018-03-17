@@ -1,0 +1,29 @@
+.user-edit-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.basic-container {
+  padding: 5px;
+}
+
+.example-card {
+  max-width: 40%;
+}
+
+.user-edit-container > * {
+  width: 40%;
+}
+
+.user-edit-field > * {
+  width: 100%;
+}
+
+.mat-form-field.mat-form-field {
+  width: auto;
+}
+.user-edit-buttons{
+  display: flex;
+  align-items: right;
+  justify-content: space-around;
+}

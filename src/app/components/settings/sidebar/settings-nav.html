@@ -1,23 +1,23 @@
 <div class="docs-component-viewer-nav">
   <div class="docs-component-viewer-nav-content">
-    <button (click)="toggleExpand('users')"
-            [attr.aria-label]="'users, section toggle'"
-            [attr.aria-controls]="'panel-users'"
-            [attr.aria-expanded]="getExpanded('users')">
-      Settings
+    <button (click)="toggleExpand('security')"
+            [attr.aria-label]="'security, section toggle'"
+            [attr.aria-controls]="'panel-security'"
+            [attr.aria-expanded]="getExpanded('security')">
+      Security
       <mat-icon >account_circle</mat-icon>
     </button>
-    <ul [@bodyExpansion]="_getExpandedState('users')" id="panel-users">
+    <ul [@bodyExpansion]="_getExpandedState('security')" id="panel-users">
       <li>
-        <a [routerLink]="'/movies'"
+        <a [routerLink]="'/settings/users'"
            routerLinkActive="docs-component-viewer-sidenav-item-selected">
           Users
         </a>
       </li>
       <li>
-        <a [routerLink]="'/movies'"
+        <a [routerLink]="'/settings/users'"
            routerLinkActive="docs-component-viewer-sidenav-item-selected">
-          Connectivity
+          LDAP
         </a>
       </li>
     </ul>
@@ -51,5 +51,13 @@
       </li>
     </ul>
     <hr>
+    <button [routerLink]="'/settings/users'">
+      <mat-icon >account_circle</mat-icon>
+      <a [routerLink]="'/settings/plex'"
+         routerLinkActive="docs-component-viewer-sidenav-item-selected">
+        Plex
+      </a>
+
+    </button>
   </div>
 </div>

@@ -24,7 +24,4 @@ export class ElasticsearchComponent implements OnInit {
         'Not a valid url';
   }
 
-
-
-
 }

@@ -1,8 +1,14 @@
-.example-container {
+.elasticsearch-container {
   display: flex;
   flex-direction: column;
 }
 
-.example-container > * {
+.elasticsearch-container > * {
   width: 100%;
+}
+
+.elasticsearch-buttons{
+  display: flex;
+  align-items: right;
+  justify-content: space-around;
 }

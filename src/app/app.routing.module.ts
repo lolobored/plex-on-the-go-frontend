@@ -3,9 +3,11 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { MoviesComponent } from './components/movies/movies.component';
 import {SettingsComponent} from './components/settings/settings.component';
-import {SettingsSidenav} from './components/settings/sidebar/settings-sidenav';
 import {ElasticsearchComponent} from './components/settings/elasticsearch/elasticsearch.component';
 import {PlexComponent} from './components/settings/plex/plex.component';
+import {UsersSettingsComponent} from './components/settings/users-settings/users-settings.component';
+import {UserEditComponent} from './components/settings/users-settings/users-edit/user-edit.component';
+import {UsersTableComponent} from './components/settings/users-settings/users-table/users-table.component';
 
 const routes: Routes = [
   { path: 'movies', component: MoviesComponent },
@@ -14,6 +16,15 @@ const routes: Routes = [
   { path: 'sync', component: MoviesComponent },
   { path: 'settings', component: SettingsComponent,
     children: [
+      {path: 'users', component: UsersSettingsComponent,
+        children: [
+          {path: '', component: UsersTableComponent},
+          {path: 'add', component: UserEditComponent},
+          {path: 'edit', children: [
+              {path: ':id', component: UserEditComponent}
+            ]}
+        ]
+      },
       {path: 'plex', component: PlexComponent},
       {path: 'plex-on-the-go', component: ElasticsearchComponent},
       {path: 'elasticsearch', component: ElasticsearchComponent}

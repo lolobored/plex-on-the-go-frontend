@@ -1,0 +1,39 @@
+.example-container {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+}
+
+.mat-table {
+  overflow: auto;
+  max-height: 500px;
+}
+
+.example-button-row {
+  display: flex;
+  align-items: left;
+  justify-content: space-around;
+}
+
+.docs-buttons-show-small {
+  display: none;
+}
+
+/**
+  * Rules for when the device is detected to be a small screen.
+  * Moves content two rows instead of one.
+  */
+@media (max-width: 720px) {
+  .docs-buttons-hide-small {
+    display: none;
+  }
+
+  .docs-buttons-show-small {
+    display: flex;
+  }
+
+  .docs-buttons {
+    display: flex;
+  }
+
+}

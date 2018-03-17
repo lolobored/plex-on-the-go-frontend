@@ -1,0 +1,62 @@
+<mat-card>
+  <button mat-raised-button color="primary" routerLink="/settings/users/add">
+    <mat-icon>add_circle</mat-icon>
+    Add a user
+  </button>
+</mat-card>
+<mat-card>
+  <div class="example-header">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+
+  </div>
+
+  <div class="example-container mat-elevation-z8">
+
+    <mat-table [dataSource]="dataSource" matSort>
+
+      <!-- Progress Column -->
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Name</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.userName}}</mat-cell>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="role">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Role</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.role}}</mat-cell>
+      </ng-container>
+
+      <!-- Plex Token Column -->
+      <ng-container matColumnDef="plex">
+        <mat-header-cell *matHeaderCellDef> Plex Token</mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <mat-icon *ngIf="!row.plexTokenValidated">error</mat-icon>
+          <mat-icon *ngIf="row.plexTokenValidated">thumb_up</mat-icon>
+        </mat-cell>
+      </ng-container>
+
+      <!-- Edit User -->
+      <ng-container matColumnDef="edit">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <div class="button-row docs-buttons-hide-small">
+            <button mat-raised-button color="primary" routerLink="/settings/users/edit/{{ row.id }}"><mat-icon>mode_edit</mat-icon>Edit</button>
+            <button mat-raised-button color="warn" (click)="deleteUser(row)"><mat-icon>delete</mat-icon>Delete</button>
+          </div>
+          <div class="button-row docs-buttons-show-small" >
+            <button mat-mini-fab color="primary"><mat-icon>mode_edit</mat-icon></button>
+            <button mat-mini-fab color="warn" (click)="deleteUser(row)"><mat-icon>delete</mat-icon></button>
+          </div>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;">
+      </mat-row>
+    </mat-table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div>
+</mat-card>
