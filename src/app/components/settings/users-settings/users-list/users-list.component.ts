@@ -16,11 +16,11 @@ import {UsersService} from '../users-settings.service';
 })
 
 @Component({
-  selector: 'app-users-table',
-  templateUrl: './users-table.component.html',
-  styleUrls: ['./users-table.component.css']
+  selector: 'app-users-list',
+  templateUrl: './users-list.component.html',
+  styleUrls: ['./users-list.component.css']
 })
-export class UsersTableComponent implements OnInit{
+export class UserListComponent implements OnInit{
   displayedColumns = ['name', 'role', 'plex', 'edit'];
   dataSource: MatTableDataSource<User>;
   users: User[];

@@ -7,7 +7,7 @@ import {ElasticsearchComponent} from './components/settings/elasticsearch/elasti
 import {PlexComponent} from './components/settings/plex/plex.component';
 import {UsersSettingsComponent} from './components/settings/users-settings/users-settings.component';
 import {UserEditComponent} from './components/settings/users-settings/users-edit/user-edit.component';
-import {UsersTableComponent} from './components/settings/users-settings/users-table/users-table.component';
+import {UserListComponent} from './components/settings/users-settings/users-list/users-list.component';
 
 const routes: Routes = [
   { path: 'movies', component: MoviesComponent },
@@ -18,7 +18,7 @@ const routes: Routes = [
     children: [
       {path: 'users', component: UsersSettingsComponent,
         children: [
-          {path: '', component: UsersTableComponent},
+          {path: '', component: UserListComponent},
           {path: 'add', component: UserEditComponent},
           {path: 'edit', children: [
               {path: ':id', component: UserEditComponent}

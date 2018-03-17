@@ -1,11 +1,11 @@
 import {Component, NgModule, OnInit} from '@angular/core';
 import {ComponentPageTitle} from '../../../shared/page-title/page-title';
-import {UsersTableComponent} from './users-table/users-table.component';
+import {UserListComponent} from './users-list/users-list.component';
 import {Router} from '@angular/router';
 
 @NgModule({
   declarations: [
-    UsersTableComponent
+    UserListComponent
   ]
 })
 

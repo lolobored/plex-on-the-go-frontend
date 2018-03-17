@@ -31,7 +31,7 @@ import {ComponentPageTitle} from './shared/page-title/page-title';
 import {SettingsSidenavModule} from './components/settings/sidebar/settings-sidenav';
 import { PlexComponent } from './components/settings/plex/plex.component';
 import { UsersSettingsComponent } from './components/settings/users-settings/users-settings.component';
-import {UsersTableComponent} from './components/settings/users-settings/users-table/users-table.component';
+import {UserListComponent} from './components/settings/users-settings/users-list/users-list.component';
 import {UsersService} from './components/settings/users-settings/users-settings.service';
 import {UserEditComponent} from './components/settings/users-settings/users-edit/user-edit.component';
 
@@ -48,7 +48,7 @@ import {UserEditComponent} from './components/settings/users-settings/users-edit
     PlexComponent,
     UsersSettingsComponent,
     UserEditComponent,
-    UsersTableComponent
+    UserListComponent
   ],
   imports: [
     BrowserModule,

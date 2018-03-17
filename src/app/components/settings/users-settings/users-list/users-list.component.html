@@ -46,7 +46,7 @@
             <button mat-raised-button color="warn" (click)="deleteUser(row)"><mat-icon>delete</mat-icon>Delete</button>
           </div>
           <div class="button-row docs-buttons-show-small" >
-            <button mat-mini-fab color="primary"><mat-icon>mode_edit</mat-icon></button>
+            <button mat-mini-fab color="primary" routerLink="/settings/users/edit/{{ row.id }}"><mat-icon>mode_edit</mat-icon></button>
             <button mat-mini-fab color="warn" (click)="deleteUser(row)"><mat-icon>delete</mat-icon></button>
           </div>
         </mat-cell>
