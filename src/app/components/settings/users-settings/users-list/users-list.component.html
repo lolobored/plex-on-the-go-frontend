@@ -16,17 +16,18 @@
 
     <mat-table [dataSource]="dataSource" matSort>
 
-      <!-- Progress Column -->
-      <ng-container matColumnDef="name">
+      <!-- Name Column -->
+      <ng-container matColumnDef="userName">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Name</mat-header-cell>
         <mat-cell *matCellDef="let row"> {{row.userName}}</mat-cell>
       </ng-container>
 
-      <!-- Name Column -->
+      <!-- Role Column -->
       <ng-container matColumnDef="role">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Role</mat-header-cell>
         <mat-cell *matCellDef="let row"> {{row.role}}</mat-cell>
       </ng-container>
+
 
       <!-- Plex Token Column -->
       <ng-container matColumnDef="plex">

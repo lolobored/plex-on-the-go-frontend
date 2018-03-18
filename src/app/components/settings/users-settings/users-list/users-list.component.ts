@@ -21,7 +21,7 @@ import {UsersService} from '../users-settings.service';
   styleUrls: ['./users-list.component.css']
 })
 export class UserListComponent implements OnInit{
-  displayedColumns = ['name', 'role', 'plex', 'edit'];
+  displayedColumns = ['userName', 'role', 'plex', 'edit'];
   dataSource: MatTableDataSource<User>;
   users: User[];
 
@@ -42,6 +42,8 @@ export class UserListComponent implements OnInit{
 
   ngOnInit() {
     this.dataSource = new MatTableDataSource(this.users);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   /**
@@ -49,6 +51,7 @@ export class UserListComponent implements OnInit{
    * be able to query its view for the initialized paginator and sort.
    */
   ngAfterViewInit() {
+    this.dataSource = new MatTableDataSource(this.users);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
