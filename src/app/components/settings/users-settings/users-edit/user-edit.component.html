@@ -15,9 +15,9 @@
       <mat-list-item>
 
         <mat-form-field>
-          <input matInput placeholder="Password" [(ngModel)]="user.password" [type]="hide ? 'password' : 'text'"
+          <input matInput placeholder="Password" [(ngModel)]="user.password" [type]="hidePassword ? 'password' : 'text'"
                  [formControl]="passwordFormControl">
-          <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+          <mat-icon matSuffix (click)="hidePassword = !hidePassword">{{hidePassword ? 'visibility' : 'visibility_off'}}</mat-icon>
           <mat-error *ngIf="passwordFormControl.hasError('required')">
             Password is <strong>required</strong>
           </mat-error>
@@ -39,9 +39,9 @@
       <mat-list-item>
         <mat-form-field>
           <input matInput placeholder="Enter your plex.tv password"
-                 [(ngModel)]="user.plexPassword" required [type]="hide ? 'password' : 'text'"
+                 [(ngModel)]="user.plexPassword" required [type]="hidePlexPassword ? 'password' : 'text'"
                  [formControl]="passwordFormControl">
-          <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+          <mat-icon matSuffix (click)="hidePlexPassword = !hidePlexPassword">{{hidePlexPassword ? 'visibility' : 'visibility_off'}}</mat-icon>
           <mat-error *ngIf="passwordFormControl.hasError('required')">
             Password is <strong>required</strong>
           </mat-error>

@@ -25,7 +25,8 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 export class UserEditComponent implements OnInit {
 
   userEditUrl = new FormControl('', [Validators.required, Validators.pattern('https?://.*')]);
-  hide = true;
+  hidePassword = true;
+  hidePlexPassword = true;
   editMode = false;
   user: User = new User();
   emailFormControl = new FormControl('', [
