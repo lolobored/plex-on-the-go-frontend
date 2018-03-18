@@ -29,5 +29,5 @@ export class SettingsComponent implements OnInit {
   declarations: [SettingsComponent],
   providers: [ComponentPageTitle],
 })
-export class GuideListModule {
+export class SettingsModule {
 }

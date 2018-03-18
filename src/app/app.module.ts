@@ -2,21 +2,17 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing.module';
 import {HttpClientModule} from '@angular/common/http';
 
-import { MoviesComponent } from './components/movies/movies.component';
-import {MoviesService} from './components/movies/movies.service';
-import { MoviesTableComponent } from './components/movies/movies-table/movies-table.component';
 
 import {
   MatPaginatorModule, MatTableModule, MatInputModule, MatSlideToggleModule, MatGridListModule,
   MatIconModule, MatMenuModule, MatToolbarModule, MatCardModule, MatButtonModule, MatTabsModule, MatExpansionModule, MatSidenavModule,
-  MatSortModule, MatDividerModule, MatOptionModule, MatSelectModule, MatListModule
+  MatSortModule, MatDividerModule, MatOptionModule, MatSelectModule, MatListModule, MatCheckboxModule, MatSliderModule
 } from '@angular/material';
 import { LoginComponent } from './components/login/login.component';
 import { UserComponent } from './components/login/user/user.component';
@@ -35,12 +31,13 @@ import {UserListComponent} from './components/settings/users-settings/users-list
 import {UsersService} from './components/settings/users-settings/users-settings.service';
 import {UserEditComponent} from './components/settings/users-settings/users-edit/user-edit.component';
 import { LdapSettingsComponent } from './components/settings/ldap-settings/ldap-settings.component';
+import { MoviesComponent } from './components/movies/movies.component';
+import {MoviesSidebarModule} from './components/movies/movies-sidebar/movies-sidebar';
+import {MoviesListComponent} from './components/movies/movies-list/movies-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MoviesComponent,
-    MoviesTableComponent,
     LoginComponent,
     UserComponent,
     MainMenuComponent,
@@ -50,7 +47,9 @@ import { LdapSettingsComponent } from './components/settings/ldap-settings/ldap-
     UsersSettingsComponent,
     UserEditComponent,
     UserListComponent,
-    LdapSettingsComponent
+    LdapSettingsComponent,
+    MoviesComponent,
+    MoviesListComponent
   ],
   imports: [
     BrowserModule,
@@ -61,6 +60,7 @@ import { LdapSettingsComponent } from './components/settings/ldap-settings/ldap-
     MatTableModule,
     MatInputModule,
     MatSlideToggleModule,
+    MatSliderModule,
     MatGridListModule,
     MatIconModule,
     MatMenuModule,
@@ -70,6 +70,7 @@ import { LdapSettingsComponent } from './components/settings/ldap-settings/ldap-
     MatOptionModule,
     MatSelectModule,
     MatListModule,
+    MatCheckboxModule,
     MatIconModule,
     MatCardModule,
     MatSortModule,
@@ -81,10 +82,10 @@ import { LdapSettingsComponent } from './components/settings/ldap-settings/ldap-
     ReactiveFormsModule,
     NavBarModule,
     ThemePickerModule,
-    SettingsSidenavModule
+    SettingsSidenavModule,
+    MoviesSidebarModule
   ],
-  providers: [MoviesService,
-    UsersService,
+  providers: [UsersService,
     StyleManager,
     ThemeStorage,
     ComponentPageTitle],

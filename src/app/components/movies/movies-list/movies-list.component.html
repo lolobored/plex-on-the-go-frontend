@@ -1,0 +1,42 @@
+<mat-card>
+  <div class="example-header">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+
+  </div>
+
+  <div class="example-container mat-elevation-z8">
+
+    <mat-table [dataSource]="moviesSharedService.dataSource" matSort>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="title">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Name</mat-header-cell>
+        <mat-cell *matCellDef="let movie"> {{movie.title}}</mat-cell>
+      </ng-container>
+
+      <!-- Role Column -->
+      <ng-container matColumnDef="year">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Year</mat-header-cell>
+        <mat-cell *matCellDef="let movie"> {{movie.year}}</mat-cell>
+      </ng-container>
+
+
+      <!-- Plex Token Column -->
+      <ng-container matColumnDef="plex">
+        <mat-header-cell *matHeaderCellDef> Plex Token</mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <mat-icon *ngIf="!row.plexTokenValidated">error</mat-icon>
+          <mat-icon *ngIf="row.plexTokenValidated">thumb_up</mat-icon>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;">
+      </mat-row>
+    </mat-table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div>
+</mat-card>

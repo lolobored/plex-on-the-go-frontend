@@ -2,6 +2,7 @@
 
 @import './app/shared/navbar/navbar-theme';
 @import './app/components/settings/sidebar/settings-sidenav-theme';
+@import './app/components/movies/movies-sidebar/movies-sidebar-theme';
 @import './styles/api-theme';
 @import './styles/markdown-theme';
 @import './styles/svg-theme';
@@ -39,4 +40,5 @@
   @include docs-site-tables-theme($theme);
   @include nav-bar-theme($theme);
   @include component-viewer-sidenav-theme($theme);
+  @include movies-sidebar-theme($theme);
 }

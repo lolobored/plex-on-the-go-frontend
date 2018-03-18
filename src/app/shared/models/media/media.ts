@@ -1,0 +1,25 @@
+import {Season} from './season';
+import {Show} from './show';
+
+export class Media {
+
+  type: string;
+  library: string;
+  user: string;
+  title: string;
+  fileLocation: string;
+  year: number;
+  rating: string;
+  summary: string;
+  genres: string[];
+  releaseDate: Date;
+  directors: string[];
+  actors: string[];
+  writers: string[];
+  // tvshows only
+  show: Show;
+  season: Season;
+  episode: number;
+
+
+}

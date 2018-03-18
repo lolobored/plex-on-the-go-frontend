@@ -8,7 +8,7 @@ import {
   MatTableDataSource,
 } from '@angular/material';
 
-import {User} from '../../../../shared/models/user';
+import {User} from '../../../../shared/models/user/user';
 import {UsersService} from '../users-settings.service';
 
 @NgModule({

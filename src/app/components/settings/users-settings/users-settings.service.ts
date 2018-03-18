@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
-import {User} from '../../../shared/models/user';
+import {User} from '../../../shared/models/user/user';
 import {ErrorObservable} from 'rxjs/observable/ErrorObservable';
 import {IError} from 'protractor/built/exitCodes';
 import 'rxjs/add/operator/map'
@@ -19,7 +19,6 @@ export class UsersService {
   private usersUrl = 'http://localhost:8080/users';
 
   public getUsers() {
-    console.log(this.http.get(this.usersUrl));
     return this.http.get(this.usersUrl);
   }
 

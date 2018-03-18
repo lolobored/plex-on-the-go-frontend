@@ -6,16 +6,16 @@
               [mode]="isScreenSmall() ? 'over' : 'side'"
               [fixedInViewport]="isScreenSmall()"
               fixedTopGap="92">
-    <app-settings-nav></app-settings-nav>
+    <app-movies-bar></app-movies-bar>
   </mat-sidenav>
   <div class="docs-component-sidenav-content">
     <app-page-header (toggleSidenav)="sidenav.toggle()"></app-page-header>
     <div class="docs-component-sidenav-inner-content">
       <div class="docs-component-sidenav-body-content">
         <!-- If on large screen, menu resides to left of content -->
-        <app-settings-nav
+        <app-movies-bar
           *ngIf="!isScreenSmall()">
-        </app-settings-nav>
+        </app-movies-bar>
         <router-outlet></router-outlet>
       </div>
     </div>

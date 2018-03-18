@@ -2,23 +2,31 @@ import {
   Component, Input, NgZone, ViewEncapsulation, ViewChild, OnInit, NgModule, trigger, state,
   animate, transition, style, OnDestroy
 } from '@angular/core';
-import {MatSidenav, MatSidenavModule, MatIconModule} from '@angular/material';
+import {
+  MatSidenav, MatSidenavModule, MatIconModule, MatCheckboxModule, MatSlideToggleModule, MatTableDataSource,
+  MatSliderModule
+} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ActivatedRoute, Params, Router, RouterModule} from '@angular/router';
 import {CommonModule} from '@angular/common';
 import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
 import {HeaderModule} from '../../../shared/page-header/page-header';
+import {FormsModule} from '@angular/forms';
+import {MoviesRestService} from '../services/movies.rest.service';
+import {MoviesSharedService} from '../services/shared.movie.service';
+
 
 const SMALL_WIDTH_BREAKPOINT = 720;
 
 @Component({
-  selector: 'app-settings-sidenav',
-  templateUrl: './settings-sidenav.html',
-  styleUrls: ['./settings-sidenav.scss'],
+  selector: 'app-movies-sidebar',
+  templateUrl: './movies-sidebar.html',
+  styleUrls: ['./movies-sidebar.scss'],
   encapsulation: ViewEncapsulation.None,
+  preserveWhitespaces: false,
 })
-export class SettingsSidenav implements OnInit {
+export class MoviesSidebar implements OnInit {
   private mediaMatcher: MediaQueryList = matchMedia(`(max-width: ${SMALL_WIDTH_BREAKPOINT}px)`);
   params: Observable<Params>;
 
@@ -44,9 +52,10 @@ export class SettingsSidenav implements OnInit {
 
 }
 
+
 @Component({
-  selector: 'app-settings-nav',
-  templateUrl: './settings-nav.html',
+  selector: 'app-movies-bar',
+  templateUrl: './movies-bar.html',
   animations: [
     trigger('bodyExpansion', [
       state('collapsed', style({height: '0px', visibility: 'hidden'})),
@@ -55,15 +64,44 @@ export class SettingsSidenav implements OnInit {
     ]),
   ],
 })
-export class SettingsNav implements OnInit, OnDestroy {
+export class MoviesBar implements OnInit, OnDestroy {
 
   @Input() params: Observable<Params>;
   expansions = {};
   private _onDestroy = new Subject<void>();
   category: string;
+  genres: string[];
+  years: number[];
 
-  constructor(private _router: Router) {
+  // sliders
+  maxFrom = 100;
+  minFrom = 0;
+  maxTo = 100;
+  minTo = 0;
+  valueFrom = 0;
+  valueTo = 0;
 
+  constructor(private _router: Router, private movieRestService: MoviesRestService,
+              private moviesSharedService: MoviesSharedService) {
+    // retrieving the list of genre
+    this.movieRestService.getGenre()
+      .subscribe( (data: string[]) => {
+        this.genres = data;
+        this.moviesSharedService.selectedGenreList = data.slice();
+      });
+    // retrieving the list of genre
+    this.movieRestService.getYears()
+      .subscribe( (data: number[]) => {
+        this.years = data;
+        this.minFrom = data[0];
+        this.minTo = data[0];
+        moviesSharedService.selectedYearFrom = data[0];
+        this.valueFrom = data[0];
+        this.maxFrom = data[data.length - 1];
+        this.maxTo = data[data.length - 1];
+        this.valueTo = data[data.length - 1];
+        moviesSharedService.selectedYearTo = data[data.length - 1];
+      });
   }
 
   ngOnInit() {
@@ -96,6 +134,16 @@ export class SettingsNav implements OnInit, OnDestroy {
     return this.expansions[category];
   }
 
+  toggleGenre(genre, event) {
+    if (event.checked === false){
+      this.moviesSharedService.removeGenre(genre);
+    } else {
+      this.moviesSharedService.addGenre(genre);
+    }
+    console.log(event.checked);
+    console.log(genre);
+  }
+
 }
 
 
@@ -106,10 +154,14 @@ export class SettingsNav implements OnInit, OnDestroy {
     CommonModule,
     BrowserAnimationsModule,
     MatIconModule,
-    HeaderModule
+    HeaderModule,
+    MatCheckboxModule,
+    MatSlideToggleModule,
+    MatSliderModule,
+    FormsModule
   ],
-  exports: [SettingsSidenav],
-  declarations: [SettingsSidenav, SettingsNav],
-  providers: [],
+  exports: [MoviesSidebar],
+  declarations: [MoviesSidebar, MoviesBar],
+  providers: [MoviesRestService, MoviesSharedService],
 })
-export class SettingsSidenavModule {}
+export class MoviesSidebarModule {}

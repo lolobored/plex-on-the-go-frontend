@@ -2,7 +2,7 @@ import {Component, NgModule, OnInit} from '@angular/core';
 import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {ComponentPageTitle} from '../../../../shared/page-title/page-title';
 import {ErrorStateMatcher} from '@angular/material';
-import {User} from '../../../../shared/models/user';
+import {User} from '../../../../shared/models/user/user';
 import {UsersService} from '../users-settings.service';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 

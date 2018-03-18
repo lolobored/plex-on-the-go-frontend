@@ -9,9 +9,14 @@ import {UsersSettingsComponent} from './components/settings/users-settings/users
 import {UserEditComponent} from './components/settings/users-settings/users-edit/user-edit.component';
 import {UserListComponent} from './components/settings/users-settings/users-list/users-list.component';
 import {LdapSettingsComponent} from './components/settings/ldap-settings/ldap-settings.component';
+import {MoviesListComponent} from './components/movies/movies-list/movies-list.component';
 
 const routes: Routes = [
-  { path: 'movies', component: MoviesComponent },
+  { path: 'movies', component: MoviesComponent,
+    children: [
+      {path: '', component: MoviesListComponent}
+      ]
+  },
   { path: 'tvshows', component: MoviesComponent },
   { path: 'downloads', component: MoviesComponent },
   { path: 'sync', component: MoviesComponent },

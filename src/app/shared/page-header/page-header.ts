@@ -1,14 +1,14 @@
 import {Component, EventEmitter, NgModule, Output} from '@angular/core';
-import {ComponentPageTitle} from '../../../shared/page-title/page-title';
-import {NavigationFocusModule} from '../../../shared/navigation-focus/navigation-focus';
+import {ComponentPageTitle} from '../page-title/page-title';
+import {NavigationFocusModule} from '../navigation-focus/navigation-focus';
 import {MatButtonModule, MatIconModule} from '@angular/material';
 
 @Component({
-  selector: 'app-settings-page-header',
-  templateUrl: './settings-page-header.html',
-  styleUrls: ['./settings-page-header.scss']
+  selector: 'app-page-header',
+  templateUrl: './page-header.html',
+  styleUrls: ['./page-header.scss']
 })
-export class SettingsPageHeader {
+export class PageHeader {
   constructor(public _componentPageTitle: ComponentPageTitle) {}
 
   @Output() toggleSidenav = new EventEmitter<void>();
@@ -20,8 +20,8 @@ export class SettingsPageHeader {
 
 @NgModule({
   imports: [MatButtonModule, MatIconModule, NavigationFocusModule],
-  exports: [SettingsPageHeader],
-  declarations: [SettingsPageHeader],
+  exports: [PageHeader],
+  declarations: [PageHeader],
   providers: [ComponentPageTitle],
 })
-export class SettingsHeaderModule { }
+export class HeaderModule { }

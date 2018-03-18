@@ -1,55 +1,36 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import {Component, NgModule, OnInit} from '@angular/core';
+import {SettingsSidenav} from '../settings/sidebar/settings-sidenav';
+import {SettingsComponent} from '../settings/settings.component';
+import {ComponentPageTitle} from '../../shared/page-title/page-title';
+import {RouterModule} from '@angular/router';
+import {CommonModule} from '@angular/common';
+import {MoviesSidebar} from './movies-sidebar/movies-sidebar';
+import {MatCheckboxModule} from '@angular/material';
 
-import { MoviesService } from './movies.service';
-import { MoviesTableComponent} from "./movies-table/movies-table.component";
-import {CdkTableModule} from '@angular/cdk/table';
-import {HttpClientModule} from '@angular/common/http';
-import {NgModule} from '@angular/core';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-
-import {
-  MatNativeDateModule,
-  MatTableModule
-} from '@angular/material';
-import {BrowserModule} from '@angular/platform-browser';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-
-@NgModule({
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    HttpClientModule,
-    MatNativeDateModule,
-    ReactiveFormsModule,
-    MatTableModule,
-    CdkTableModule
-  ],
-  entryComponents: [MoviesTableComponent],
-  declarations: [MoviesTableComponent],
-  bootstrap: [MoviesTableComponent],
-  providers: []
-})
 @Component({
-  selector: 'app-movie',
+  selector: 'app-movies',
   templateUrl: './movies.component.html',
-  styles: []
+  styleUrls: ['./movies.component.css']
 })
-export class  MoviesComponent implements OnInit {
+export class MoviesComponent implements OnInit {
 
-  private movies: Array<any>;
-
-  constructor(private router: Router, private movieService: MoviesService) {
-
+  constructor(public _componentPageTitle: ComponentPageTitle) {
   }
 
-  ngOnInit() {
-    this.movieService.getMovies()
-      .subscribe( data => {
-        this.movies = data;
-      });
-  };
+  panelOpenState: false;
+
+  ngOnInit(): void {
+    this.panelOpenState = false;
+    this._componentPageTitle.title = 'Movies';
+  }
+}
 
 
+@NgModule({
+  imports: [RouterModule, CommonModule, MoviesSidebar],
+  exports: [MoviesComponent],
+  declarations: [MoviesComponent],
+  providers: [ComponentPageTitle],
+})
+export class MoviesModule {
 }
