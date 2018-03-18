@@ -1,10 +1,11 @@
 @import '../node_modules/@angular/material/theming';
 
 @import './app/shared/navbar/navbar-theme';
-@import 'styles/api-theme';
-@import 'styles/markdown-theme';
-@import 'styles/svg-theme';
-@import 'styles/tables-theme';
+@import './app/components/settings/sidebar/settings-sidenav-theme';
+@import './styles/api-theme';
+@import './styles/markdown-theme';
+@import './styles/svg-theme';
+@import './styles/tables-theme';
 
 
 // Styles for the docs app that are based on the current theme.
@@ -37,4 +38,5 @@
   @include docs-site-svg-theme($theme);
   @include docs-site-tables-theme($theme);
   @include nav-bar-theme($theme);
+  @include component-viewer-sidenav-theme($theme);
 }

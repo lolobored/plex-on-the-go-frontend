@@ -1,5 +1,5 @@
-@import '../../../../node_modules/@angular/material/theming';
-@import '../../../styles/constants';
+@import '../../../../../node_modules/@angular/material/theming';
+@import '../../../../styles/constants';
 
 @mixin component-viewer-sidenav-theme($theme) {
   $primary: map-get($theme, primary);

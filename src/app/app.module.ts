@@ -34,6 +34,7 @@ import { UsersSettingsComponent } from './components/settings/users-settings/use
 import {UserListComponent} from './components/settings/users-settings/users-list/users-list.component';
 import {UsersService} from './components/settings/users-settings/users-settings.service';
 import {UserEditComponent} from './components/settings/users-settings/users-edit/user-edit.component';
+import { LdapSettingsComponent } from './components/settings/ldap-settings/ldap-settings.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import {UserEditComponent} from './components/settings/users-settings/users-edit
     PlexComponent,
     UsersSettingsComponent,
     UserEditComponent,
-    UserListComponent
+    UserListComponent,
+    LdapSettingsComponent
   ],
   imports: [
     BrowserModule,

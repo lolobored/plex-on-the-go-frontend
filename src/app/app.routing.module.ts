@@ -8,6 +8,7 @@ import {PlexComponent} from './components/settings/plex/plex.component';
 import {UsersSettingsComponent} from './components/settings/users-settings/users-settings.component';
 import {UserEditComponent} from './components/settings/users-settings/users-edit/user-edit.component';
 import {UserListComponent} from './components/settings/users-settings/users-list/users-list.component';
+import {LdapSettingsComponent} from './components/settings/ldap-settings/ldap-settings.component';
 
 const routes: Routes = [
   { path: 'movies', component: MoviesComponent },
@@ -25,6 +26,7 @@ const routes: Routes = [
             ]}
         ]
       },
+      {path: 'ldap', component: LdapSettingsComponent},
       {path: 'plex', component: PlexComponent},
       {path: 'plex-on-the-go', component: ElasticsearchComponent},
       {path: 'elasticsearch', component: ElasticsearchComponent}
