@@ -16,8 +16,8 @@ export class UsersService {
 
   constructor(private http: HttpClient) {}
 
-  private usersUrl = 'http://backend:8080/users';
-  private usersSearchByNameUrl = 'http://backend:8080/users/byname';
+  private usersUrl = 'http://backend:8888/users';
+  private usersSearchByNameUrl = 'http://backend:8888/users/byname';
 
   public getUsers() {
     return this.http.get(this.usersUrl);

@@ -6,7 +6,7 @@ export function initializer(keycloak: KeycloakService): () => Promise<any> {
       try {
         await keycloak.init({
           config: {
-            url: 'http://keycloak:4664/auth/', // .ie: http://backend:8080/auth/
+            url: 'http://keycloak:4664/auth/', // .ie: http://backend:8888/auth/
             realm: 'plex', // .ie: master
             clientId: 'plex' // .ie: account
           },
