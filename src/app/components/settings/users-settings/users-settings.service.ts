@@ -4,7 +4,7 @@ import {Observable} from 'rxjs/Observable';
 import {User} from '../../../shared/models/user/user';
 import {ErrorObservable} from 'rxjs/observable/ErrorObservable';
 import {IError} from 'protractor/built/exitCodes';
-import 'rxjs/add/operator/map'
+import 'rxjs/add/operator/map';
 import {Subscriber} from 'rxjs/Subscriber';
 
 const httpOptions = {
@@ -16,7 +16,8 @@ export class UsersService {
 
   constructor(private http: HttpClient) {}
 
-  private usersUrl = 'http://localhost:8080/users';
+  private usersUrl = 'http://backend:8080/users';
+  private usersSearchByNameUrl = 'http://backend:8080/users/byname';
 
   public getUsers() {
     return this.http.get(this.usersUrl);
@@ -26,15 +27,19 @@ export class UsersService {
     return this.http.get(this.usersUrl + '/' + id);
   }
 
+  public getUserByUserName(userName: string) {
+    return this.http.get(this.usersSearchByNameUrl + '/' + userName);
+  }
+
   public deleteUser(user: User) {
     return this.http.delete(this.usersUrl + '/' + user.id);
   }
 
   public createUser(user: User) {
-    this.http.post(this.usersUrl, user, httpOptions).subscribe();
+    return this.http.post(this.usersUrl, user, httpOptions);
   }
 
   public updateUser(user: User) {
-    this.http.put(this.usersUrl + '/' + user.id, user, httpOptions).subscribe();
+    return this.http.put(this.usersUrl + '/' + user.id, user, httpOptions);
   }
 }

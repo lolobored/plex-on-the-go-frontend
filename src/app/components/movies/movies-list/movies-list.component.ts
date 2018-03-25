@@ -10,6 +10,7 @@ import {
 import {Media} from '../../../shared/models/media/media';
 import {MoviesRestService} from '../services/movies.rest.service';
 import {MoviesSharedService} from '../services/shared.movie.service';
+import {KeycloakService} from 'keycloak-angular';
 
 @NgModule({
   providers: [MoviesRestService, MoviesSharedService]
@@ -20,19 +21,18 @@ import {MoviesSharedService} from '../services/shared.movie.service';
   templateUrl: './movies-list.component.html',
   styleUrls: ['./movies-list.component.css']
 })
-export class MoviesListComponent implements OnInit{
+export class MoviesListComponent implements OnInit {
   displayedColumns = ['title', 'year'];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(public moviesSharedService: MoviesSharedService) {
-    this.moviesSharedService.dataSource = new MatTableDataSource(this.moviesSharedService.movies);
-    this.moviesSharedService.paginator = this.paginator;
-    this.moviesSharedService.sort = this.sort;
+  constructor(public moviesSharedService: MoviesSharedService, private keycloakService: KeycloakService) {
+    this.moviesSharedService.getAllMovies();
   }
 
   ngOnInit() {
+
     this.moviesSharedService.dataSource = new MatTableDataSource(this.moviesSharedService.movies);
     this.moviesSharedService.paginator = this.paginator;
     this.moviesSharedService.sort = this.sort;

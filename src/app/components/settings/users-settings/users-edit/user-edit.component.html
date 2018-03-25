@@ -4,7 +4,7 @@
   </mat-card-header>
   <mat-card-content>
     <mat-list>
-      <mat-list-item>
+  <!--    <mat-list-item>
         <mat-form-field class="user-edit-field">
           <input matInput placeholder="Username" [(ngModel)]="user.userName" required [formControl]="userNameFormControl">
           <mat-error *ngIf="userNameFormControl.hasError('required')">
@@ -22,7 +22,7 @@
             Password is <strong>required</strong>
           </mat-error>
         </mat-form-field>
-      </mat-list-item>
+      </mat-list-item>-->
       <mat-list-item>
 
         <mat-form-field>
@@ -47,21 +47,21 @@
           </mat-error>
         </mat-form-field>
       </mat-list-item>
-      <mat-list-item>
+      <!--   <mat-list-item>
 
 
-        <mat-form-field>
-          <mat-select placeholder="User Type"  [(ngModel)]="user.role" >
-            <mat-option *ngFor="let type of types"[value]="type.value">
-              {{ type.viewValue }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </mat-list-item>
-    </mat-list>
-  </mat-card-content>
-  <mat-card-actions>
-    <button mat-button routerLink="/settings/users">Cancel</button>
-    <button mat-button  routerLink="/settings/users" (click)="editUser()" >OK</button>
-  </mat-card-actions>
-</mat-card>
+         <mat-form-field>
+            <mat-select placeholder="User Type"  [(ngModel)]="user.role" >
+              <mat-option *ngFor="let type of types"[value]="type.value">
+                {{ type.viewValue }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-list-item> -->
+      </mat-list>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button (click)="cancel()">Cancel</button>
+      <button mat-button  (click)="editUser()" >OK</button>
+    </mat-card-actions>
+  </mat-card>

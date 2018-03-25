@@ -1,6 +1,6 @@
 
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {APP_INITIALIZER, NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
@@ -34,6 +34,8 @@ import { LdapSettingsComponent } from './components/settings/ldap-settings/ldap-
 import { MoviesComponent } from './components/movies/movies.component';
 import {MoviesSidebarModule} from './components/movies/movies-sidebar/movies-sidebar';
 import {MoviesListComponent} from './components/movies/movies-list/movies-list.component';
+import {initializer} from './utils/app-init';
+import {KeycloakAngularModule, KeycloakService} from 'keycloak-angular';
 
 @NgModule({
   declarations: [
@@ -83,12 +85,19 @@ import {MoviesListComponent} from './components/movies/movies-list/movies-list.c
     NavBarModule,
     ThemePickerModule,
     SettingsSidenavModule,
-    MoviesSidebarModule
+    MoviesSidebarModule,
+    KeycloakAngularModule
   ],
   providers: [UsersService,
     StyleManager,
     ThemeStorage,
-    ComponentPageTitle],
+    ComponentPageTitle,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializer,
+      multi: true,
+      deps: [KeycloakService]
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

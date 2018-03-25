@@ -1,6 +1,8 @@
-import {Component, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
 import {filter} from 'rxjs/operators/filter';
+import { KeycloakProfile } from 'keycloak-js';
+import { KeycloakService } from 'keycloak-angular';
 
 @Component({
   selector: 'app-root',
@@ -8,8 +10,9 @@ import {filter} from 'rxjs/operators/filter';
   styleUrls: ['./app.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class AppComponent {
-  constructor(router: Router) {
+export class AppComponent implements OnInit {
+  userDetails: KeycloakProfile;
+  constructor(router: Router, private keycloakService: KeycloakService) {
     let previousRoute = router.routerState.snapshot.url;
 
     router.events
@@ -23,6 +26,14 @@ export class AppComponent {
 
         previousRoute = data.urlAfterRedirects;
       });
+  }
+
+  async ngOnInit() {
+    this.userDetails = await this.keycloakService.loadUserProfile();
+  }
+
+  async doLogout() {
+    await this.keycloakService.logout();
   }
 }
 

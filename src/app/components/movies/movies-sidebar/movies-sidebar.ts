@@ -140,8 +140,15 @@ export class MoviesBar implements OnInit, OnDestroy {
     } else {
       this.moviesSharedService.addGenre(genre);
     }
-    console.log(event.checked);
-    console.log(genre);
+  }
+
+  toggleYearFrom(year, event) {
+    this.minTo = year;
+    this.moviesSharedService.changeSelectedYearFrom(this.valueFrom);
+  }
+  toggleYearTo(year, event) {
+    this.maxFrom = year;
+    this.moviesSharedService.changeSelectedYearTo(this.valueTo);
   }
 
 }

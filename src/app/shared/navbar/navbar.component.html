@@ -33,20 +33,31 @@
   <theme-picker></theme-picker>
   <a mat-button class="docs-button docs-navbar-hide-small" href="https://github.com/lolobored/plex-on-the-go-frontend"
      aria-label="GitHub Repository">
-      <img class="docs-angular-logo"
-           src="../../../assets/img/homepage/github-circle-white-transparent.svg"
-           alt="angular">
-      GitHub
-    </a>
-    <a mat-icon-button class="docs-button docs-navbar-show-small"
-       href="https://github.com/lolobored/plex-on-the-go-frontend" aria-label="GitHub Repository">
-      <img class="docs-angular-logo"
-           src="../../../assets/img/homepage/github-circle-white-transparent.svg"
-           alt="angular">
-    </a>
+    <img class="docs-angular-logo"
+         src="../../../assets/img/homepage/github-circle-white-transparent.svg"
+         alt="angular">
+    GitHub
+  </a>
+  <a mat-icon-button class="docs-button docs-navbar-show-small"
+     href="https://github.com/lolobored/plex-on-the-go-frontend" aria-label="GitHub Repository">
+    <img class="docs-angular-logo"
+         src="../../../assets/img/homepage/github-circle-white-transparent.svg"
+         alt="angular">
+  </a>
+  <a mat-button class="docs-navbar-hide-small docs-button" [matMenuTriggerFor]="usermenu">
+  <mat-icon>person</mat-icon>
+    <span>{{ username }}</span>
+  </a>
+  <a mat-icon-button class="docs-navbar-link docs-navbar-show-small" [matMenuTriggerFor]="usermenu">
+    <mat-icon>person</mat-icon>
+  </a>
+  <mat-menu #usermenu="matMenu" yPosition="below" [overlapTrigger]="false">
+    <button color="primary" mat-menu-item routerLink="/settings/users/edit/{{ userId }}">Profile</button>
+    <button color="primary" mat-menu-item (click)="logout()">Logout</button>
+  </mat-menu>
 
 
-    </nav>
+</nav>
 <nav class="docs-navbar docs-navbar-show-small">
   <a mat-icon-button class="docs-navbar-link" routerLink="movies">
     <mat-icon>movie</mat-icon>

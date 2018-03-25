@@ -10,31 +10,46 @@ import {UserEditComponent} from './components/settings/users-settings/users-edit
 import {UserListComponent} from './components/settings/users-settings/users-list/users-list.component';
 import {LdapSettingsComponent} from './components/settings/ldap-settings/ldap-settings.component';
 import {MoviesListComponent} from './components/movies/movies-list/movies-list.component';
+import {AppAuthGuard} from './app.authguard';
 
 const routes: Routes = [
   { path: 'movies', component: MoviesComponent,
+    canActivate: [AppAuthGuard],
     children: [
-      {path: '', component: MoviesListComponent}
+      {path: '', component: MoviesListComponent,
+        canActivate: [AppAuthGuard]}
       ]
   },
-  { path: 'tvshows', component: MoviesComponent },
-  { path: 'downloads', component: MoviesComponent },
-  { path: 'sync', component: MoviesComponent },
+  { path: 'tvshows', component: MoviesComponent ,
+    canActivate: [AppAuthGuard]},
+  { path: 'downloads', component: MoviesComponent ,
+    canActivate: [AppAuthGuard]},
+  { path: 'sync', component: MoviesComponent ,
+    canActivate: [AppAuthGuard]},
   { path: 'settings', component: SettingsComponent,
+    canActivate: [AppAuthGuard],
     children: [
       {path: 'users', component: UsersSettingsComponent,
+        canActivate: [AppAuthGuard],
         children: [
-          {path: '', component: UserListComponent},
-          {path: 'add', component: UserEditComponent},
+          {path: '', component: UserListComponent,
+            canActivate: [AppAuthGuard]},
+          {path: 'add', component: UserEditComponent,
+            canActivate: [AppAuthGuard]},
           {path: 'edit', children: [
-              {path: ':id', component: UserEditComponent}
+              {path: ':id', component: UserEditComponent,
+                canActivate: [AppAuthGuard]}
             ]}
         ]
       },
-      {path: 'ldap', component: LdapSettingsComponent},
-      {path: 'plex', component: PlexComponent},
-      {path: 'plex-on-the-go', component: ElasticsearchComponent},
-      {path: 'elasticsearch', component: ElasticsearchComponent}
+      {path: 'ldap', component: LdapSettingsComponent,
+        canActivate: [AppAuthGuard]},
+      {path: 'plex', component: PlexComponent,
+        canActivate: [AppAuthGuard]},
+      {path: 'plex-on-the-go', component: ElasticsearchComponent,
+        canActivate: [AppAuthGuard]},
+      {path: 'elasticsearch', component: ElasticsearchComponent,
+        canActivate: [AppAuthGuard]}
     ]}
 ];
 
@@ -45,6 +60,7 @@ const routes: Routes = [
   exports: [
     RouterModule
   ],
+  providers: [AppAuthGuard],
   declarations: []
 })
 export class AppRoutingModule { }

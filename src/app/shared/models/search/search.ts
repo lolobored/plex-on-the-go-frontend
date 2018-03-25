@@ -2,7 +2,8 @@ export class Search {
 
   user: string;
   title: string;
-  year: number;
+  yearFrom: number;
+  yearTo: number;
   rating: string;
   genres: string[];
   directors: string[];

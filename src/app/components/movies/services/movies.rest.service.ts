@@ -16,13 +16,13 @@ export class MoviesRestService {
 
   constructor(private http: HttpClient) {}
 
-  private moviesUrl = 'http://localhost:8080/movies';
-  private genreUrl = 'http://localhost:8080/movies/genre';
-  private yearUrl = 'http://localhost:8080/movies/year';
-  private searchUrl = 'http://localhost:8080/movies/search';
+  private moviesUrl = 'http://backend:8080/movies';
+  private genreUrl = 'http://backend:8080/movies/genre';
+  private yearUrl = 'http://backend:8080/movies/year';
+  private searchUrl = 'http://backend:8080/movies/search';
 
-  public getMovies() {
-    return this.http.get(this.moviesUrl);
+  public getMovies(user: string) {
+    return this.http.post(this.moviesUrl, user, httpOptions);
   }
 
   public getGenre() {

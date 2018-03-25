@@ -35,7 +35,8 @@
         [min]="minFrom"
         color="primary"
         [thumb-label]="true"
-        [(ngModel)]="valueFrom">
+        [(ngModel)]="valueFrom"
+        (change)="toggleYearFrom(valueFrom, $event)">
       </mat-slider>
       <li>
         To
@@ -46,7 +47,8 @@
         [min]="minTo"
         color="primary"
         [thumb-label]="true"
-        [(ngModel)]="valueTo">
+        [(ngModel)]="valueTo"
+        (change)="toggleYearTo(valueTo, $event)">
       </mat-slider>
     </ul>
     <hr>

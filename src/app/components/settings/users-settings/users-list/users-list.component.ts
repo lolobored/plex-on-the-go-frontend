@@ -21,7 +21,7 @@ import {UsersService} from '../users-settings.service';
   styleUrls: ['./users-list.component.css']
 })
 export class UserListComponent implements OnInit{
-  displayedColumns = ['userName', 'role', 'plex', 'edit'];
+  displayedColumns = ['userName', 'plex', 'edit'];
   dataSource: MatTableDataSource<User>;
   users: User[];
 

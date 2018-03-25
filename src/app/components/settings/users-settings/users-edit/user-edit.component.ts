@@ -5,6 +5,7 @@ import {ErrorStateMatcher} from '@angular/material';
 import {User} from '../../../../shared/models/user/user';
 import {UsersService} from '../users-settings.service';
 import {ActivatedRoute, Params, Router} from '@angular/router';
+import { Location } from '@angular/common';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -41,16 +42,15 @@ export class UserEditComponent implements OnInit {
   ]);
 
   types = [ {value: 'User', viewValue: 'User'},
-    {value: 'Admin', viewValue: 'Admin'},];
+    {value: 'Admin', viewValue: 'Admin'}, ];
 
   matcher = new MyErrorStateMatcher();
 
   constructor(public _componentPageTitle: ComponentPageTitle,
               private userService: UsersService,
               private _route: ActivatedRoute,
-              private routerService: Router) {
-    console.log(routerService);
-
+              private routerService: Router,
+              private location: Location) {
 
   }
 
@@ -62,11 +62,13 @@ export class UserEditComponent implements OnInit {
   }
 
   initializeUser(res: Params): void {
-    if (res.id === undefined){
+    if (res.id === undefined) {
       this.user = new User();
       this.editMode = false;
     } else {
-      this.userService.getUser(res.id).subscribe((user: User) => this.user = user);
+      this.userService.getUser(res.id).subscribe((user: User) =>
+        this.user = user
+      );
       this.editMode = true;
     }
   }
@@ -79,11 +81,16 @@ export class UserEditComponent implements OnInit {
 
   editUser(): void {
     if (!this.editMode) {
-      this.userService.createUser(this.user);
+      this.userService.createUser(this.user).subscribe();
+    } else {
+      this.userService.updateUser(this.user).subscribe();
     }
-    else{
-      this.userService.updateUser(this.user);
-    }
+    this.location.back();
+  }
+
+  cancel(): void {
+
+    this.location.back();
   }
 
 }
