@@ -1,27 +1,48 @@
-# PlexFrontend
+# Plex Frontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.2.
+Multi-user User Interface in Angular JS 5 and abusing Material Design (https://material.io) to interact with the Plex-On-The-Go backend using Spring Boot 2.
+Find more information about the Plex-On-The-Go backend here: https://github.com/lolobored/plex-on-the-go
 
-## Development server
+## Goal
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+The goal of the project is to allow users of the Plex service to create an "on-the-go" local library containing all your favorites tvshows and movies in a reduced size for storing these on a laptop on-the-go.
 
-## Code scaffolding
+## Features (WIP)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+* Identity manager with different level of users (users, administrators) provided through Keycloak (https://www.keycloak.org)
+* Selection of movies to convert filterable by:
+  * Genre
+  * Year
+  * IMDB rating
+  * Watched status
+  * Latest added movies
+* Selection of tvshows to convert filterable by:
+  * TVShow
+  * Year
+  * TVDB rating
+  * Watched status
+  * Latest added episodes
+  
+Automatic subscription will be also provided by:
+* Selecting a show or its season to automatically convert it as soon as a new episode is added to the library
+* Automatically download new entries
 
-## Build
+## Stack
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+Globally with the backend and the frontend, the stack is:
+* Spring Boot 2.0
+* Spring Data 
+* AngularJS 5
+* Jackson
+* Elastic Search
+* Keycloak
+* Gradle
 
-## Running unit tests
+## Configuration
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+To be updated
+  
+## Run the project
 
-## Running end-to-end tests
+A docker compose is provided here: https://github.com/lolobored/plex-on-the-go-infrastructure
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
