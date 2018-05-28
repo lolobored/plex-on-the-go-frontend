@@ -6,6 +6,7 @@ import {IError} from 'protractor/built/exitCodes';
 import 'rxjs/add/operator/map'
 import {Subscriber} from 'rxjs/Subscriber';
 import {Search} from '../../../shared/models/search/search';
+import {environment} from '../../../../environments/properties';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -16,10 +17,10 @@ export class MoviesRestService {
 
   constructor(private http: HttpClient) {}
 
-  private moviesUrl = 'http://lolobored.synology.me:8888/movies';
-  private genreUrl = 'http://lolobored.synology.me:8888/movies/genre';
-  private yearUrl = 'http://lolobored.synology.me:8888/movies/year';
-  private searchUrl = 'http://lolobored.synology.me:8888/movies/search';
+  private moviesUrl = environment.apiUrl + '/movies';
+  private genreUrl = environment.apiUrl + '/movies/genre';
+  private yearUrl = environment.apiUrl + '/movies/year';
+  private searchUrl = environment.apiUrl + '/movies/search';
 
   public getMovies(user: string) {
     return this.http.post(this.moviesUrl, user, httpOptions);

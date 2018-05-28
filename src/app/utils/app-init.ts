@@ -1,14 +1,17 @@
 import { KeycloakService } from 'keycloak-angular';
+import {environment} from '../../environments/properties';
+
 
 export function initializer(keycloak: KeycloakService): () => Promise<any> {
+
   return (): Promise<any> => {
     return new Promise(async (resolve, reject) => {
       try {
         await keycloak.init({
           config: {
-            url: 'http://lolobored.synology.me:4664/auth/', // .ie: http://lolobored.synology.me:8888/auth/
+            url: environment.keycloakUrl + '/auth',
             realm: 'plex', // .ie: master
-            clientId: 'plex' // .ie: account
+            clientId: 'plex-frontend' // .ie: account
           },
           initOptions: {
             onLoad: 'login-required',

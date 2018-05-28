@@ -6,6 +6,7 @@ import {CommonModule} from '@angular/common';
 import {KeycloakService} from 'keycloak-angular';
 import {UsersService} from '../../components/settings/users-settings/users-settings.service';
 import {User} from '../models/user/user';
+import {environment} from '../../../environments/properties';
 
 
 @Component({
@@ -32,7 +33,7 @@ export class NavbarComponent implements OnInit {
   }
 
   logout() {
-    this.keycloakService.logout('http://frontend:4200');
+    this.keycloakService.logout(environment.keycloakUrl);
   }
 
 }

@@ -6,6 +6,7 @@ import {ErrorObservable} from 'rxjs/observable/ErrorObservable';
 import {IError} from 'protractor/built/exitCodes';
 import 'rxjs/add/operator/map';
 import {Subscriber} from 'rxjs/Subscriber';
+import {environment} from '../../../../environments/properties';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -16,8 +17,8 @@ export class UsersService {
 
   constructor(private http: HttpClient) {}
 
-  private usersUrl = 'http://lolobored.synology.me:8888/users';
-  private usersSearchByNameUrl = 'http://lolobored.synology.me:8888/users/byname';
+  private usersUrl = environment.apiUrl + '/users';
+  private usersSearchByNameUrl = environment.apiUrl + '/users/byname';
 
   public getUsers() {
     return this.http.get(this.usersUrl);
