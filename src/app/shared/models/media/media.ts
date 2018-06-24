@@ -10,6 +10,7 @@ export class Media {
   fileLocation: string;
   year: number;
   rating: string;
+  watched: boolean;
   summary: string;
   genres: string[];
   releaseDate: Date;
