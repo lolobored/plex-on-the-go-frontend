@@ -1,9 +1,13 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, NgModule, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {KeycloakService} from 'keycloak-angular';
 import {UsersService} from '../settings/users-settings/users-settings.service';
 import {ConversionsRestService} from './conversions.rest.service';
 import {Conversion} from '../../shared/models/conversion/conversion';
+
+@NgModule({
+  providers: [ConversionsRestService]
+})
 
 @Component({
   selector: 'app-sync',
