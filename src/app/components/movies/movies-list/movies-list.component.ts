@@ -23,7 +23,7 @@ import {User} from '../../../shared/models/user/user';
   styleUrls: ['./movies-list.component.css']
 })
 export class MoviesListComponent implements OnInit {
-  displayedColumns = ['title', 'year', 'convert'];
+  displayedColumns = ['title', 'year', 'watched', 'convert'];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
