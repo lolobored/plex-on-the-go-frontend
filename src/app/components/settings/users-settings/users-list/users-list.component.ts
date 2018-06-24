@@ -20,7 +20,7 @@ import {UsersService} from '../users-settings.service';
   templateUrl: './users-list.component.html',
   styleUrls: ['./users-list.component.css']
 })
-export class UserListComponent implements OnInit{
+export class UserListComponent implements OnInit {
   displayedColumns = ['userName', 'plex', 'edit'];
   dataSource: MatTableDataSource<User>;
   users: User[];

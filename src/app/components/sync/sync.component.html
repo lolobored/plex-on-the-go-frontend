@@ -12,7 +12,7 @@
       <!-- Percentage Column -->
       <ng-container matColumnDef="progress">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Progress</mat-header-cell>
-        <mat-cell *matCellDef="let conversion"> {{conversion.percentage}}</mat-cell>
+        <mat-cell *matCellDef="let conversion"><mat-progress-bar mode="determinate" value="{{conversion.percentage}}"></mat-progress-bar></mat-cell>
       </ng-container>
 
       <!-- Role Column -->

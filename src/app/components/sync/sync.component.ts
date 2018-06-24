@@ -1,12 +1,13 @@
 import {Component, NgModule, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {KeycloakService} from 'keycloak-angular';
-import {UsersService} from '../settings/users-settings/users-settings.service';
-import {ConversionsRestService} from './conversions.rest.service';
+import {UsersService} from '../settings/users-settings/users-settings.service'
 import {Conversion} from '../../shared/models/conversion/conversion';
+import {ConversionsService} from './conversions.service';
+import {User} from '../../shared/models/user/user';
 
 @NgModule({
-  providers: [ConversionsRestService]
+  providers: [UsersService, ConversionsService]
 })
 
 @Component({
@@ -25,11 +26,12 @@ export class SyncComponent implements OnInit {
 
   username: string;
 
-  constructor(private conversionService: ConversionsRestService, private keycloakService: KeycloakService,
+  constructor(private conversionService: ConversionsService, private keycloakService: KeycloakService,
               private userService: UsersService) {
     this.username = this.keycloakService.getUsername();
 
     this.conversionService.getConversions(this.username).subscribe((data: Conversion[]) => {
+      console.log(data);
       this.conversions = data;
       this.dataSource = new MatTableDataSource(this.conversions);
       this.dataSource.paginator = this.paginator;

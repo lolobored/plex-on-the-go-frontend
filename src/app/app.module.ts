@@ -12,7 +12,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {
   MatPaginatorModule, MatTableModule, MatInputModule, MatSlideToggleModule, MatGridListModule,
   MatIconModule, MatMenuModule, MatToolbarModule, MatCardModule, MatButtonModule, MatTabsModule, MatExpansionModule, MatSidenavModule,
-  MatSortModule, MatDividerModule, MatOptionModule, MatSelectModule, MatListModule, MatCheckboxModule, MatSliderModule
+  MatSortModule, MatDividerModule, MatOptionModule, MatSelectModule, MatListModule, MatCheckboxModule, MatSliderModule, MatProgressBarModule
 } from '@angular/material';
 import { LoginComponent } from './components/login/login.component';
 import { UserComponent } from './components/login/user/user.component';
@@ -28,7 +28,6 @@ import {SettingsSidenavModule} from './components/settings/sidebar/settings-side
 import { PlexComponent } from './components/settings/plex/plex.component';
 import { UsersSettingsComponent } from './components/settings/users-settings/users-settings.component';
 import {UserListComponent} from './components/settings/users-settings/users-list/users-list.component';
-import {UsersService} from './components/settings/users-settings/users-settings.service';
 import {UserEditComponent} from './components/settings/users-settings/users-edit/user-edit.component';
 import { LdapSettingsComponent } from './components/settings/ldap-settings/ldap-settings.component';
 import { MoviesComponent } from './components/movies/movies.component';
@@ -37,6 +36,7 @@ import {MoviesListComponent} from './components/movies/movies-list/movies-list.c
 import {initializer} from './utils/app-init';
 import {KeycloakAngularModule, KeycloakService} from 'keycloak-angular';
 import { SyncComponent } from './components/sync/sync.component';
+import {ConversionsService} from './components/sync/conversions.service';
 
 @NgModule({
   declarations: [
@@ -75,6 +75,7 @@ import { SyncComponent } from './components/sync/sync.component';
     MatSelectModule,
     MatListModule,
     MatCheckboxModule,
+    MatProgressBarModule,
     MatIconModule,
     MatCardModule,
     MatSortModule,
@@ -90,10 +91,10 @@ import { SyncComponent } from './components/sync/sync.component';
     MoviesSidebarModule,
     KeycloakAngularModule
   ],
-  providers: [UsersService,
-    StyleManager,
+  providers: [StyleManager,
     ThemeStorage,
     ComponentPageTitle,
+    ConversionsService,
     {
       provide: APP_INITIALIZER,
       useFactory: initializer,
