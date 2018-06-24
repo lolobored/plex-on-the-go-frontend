@@ -11,6 +11,7 @@ import {Media} from '../../../shared/models/media/media';
 import {MoviesRestService} from '../services/movies.rest.service';
 import {MoviesSharedService} from '../services/shared.movie.service';
 import {KeycloakService} from 'keycloak-angular';
+import {User} from '../../../shared/models/user/user';
 
 @NgModule({
   providers: [MoviesRestService, MoviesSharedService]
@@ -22,7 +23,7 @@ import {KeycloakService} from 'keycloak-angular';
   styleUrls: ['./movies-list.component.css']
 })
 export class MoviesListComponent implements OnInit {
-  displayedColumns = ['title', 'year'];
+  displayedColumns = ['title', 'year', 'convert'];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;

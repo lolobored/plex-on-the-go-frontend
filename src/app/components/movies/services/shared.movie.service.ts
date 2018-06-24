@@ -91,4 +91,11 @@ export class MoviesSharedService {
       this.dataSource.sort = this.sort;
     });
   }
+
+  addConvert(media: Media): void {
+    this.moviesService.addConversion(media)
+      .subscribe( data => {
+
+      });
+  };
 }

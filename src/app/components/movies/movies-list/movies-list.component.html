@@ -24,11 +24,15 @@
 
 
       <!-- Plex Token Column -->
-      <ng-container matColumnDef="plex">
-        <mat-header-cell *matHeaderCellDef> Plex Token</mat-header-cell>
+      <ng-container matColumnDef="convert">
+        <mat-header-cell *matHeaderCellDef> Convert</mat-header-cell>
         <mat-cell *matCellDef="let row">
-          <mat-icon *ngIf="!row.plexTokenValidated">error</mat-icon>
-          <mat-icon *ngIf="row.plexTokenValidated">thumb_up</mat-icon>
+          <div class="button-row docs-buttons-hide-small">
+            <button mat-raised-button color="primary" (click)="this.moviesSharedService.addConvert(row)"><mat-icon>library_add</mat-icon>Add</button>
+          </div>
+          <div class="button-row docs-buttons-show-small" >
+            <button mat-mini-fab color="primary" (click)="this.moviesSharedService.addConvert(row)"><mat-icon>library_add</mat-icon></button>
+          </div>
         </mat-cell>
       </ng-container>
 

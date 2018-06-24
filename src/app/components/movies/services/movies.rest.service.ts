@@ -7,6 +7,7 @@ import 'rxjs/add/operator/map'
 import {Subscriber} from 'rxjs/Subscriber';
 import {Search} from '../../../shared/models/search/search';
 import {environment} from '../../../../environments/properties';
+import {Media} from '../../../shared/models/media/media';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -22,6 +23,9 @@ export class MoviesRestService {
   private yearUrl = environment.apiUrl + '/movies/year';
   private searchUrl = environment.apiUrl + '/movies/search';
 
+  private addMovie = environment.apiUrl + '/conversions/add';
+
+
   public getMovies(user: string) {
     return this.http.post(this.moviesUrl, user, httpOptions);
   }
@@ -36,5 +40,9 @@ export class MoviesRestService {
 
   public searchMovies(search: Search){
     return this.http.post(this.searchUrl, search, httpOptions);
+  }
+
+  public addConversion(media: Media){
+    return this.http.post(this.addMovie, media, httpOptions);
   }
 }
