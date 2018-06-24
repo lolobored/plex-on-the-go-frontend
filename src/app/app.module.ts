@@ -36,6 +36,7 @@ import {MoviesSidebarModule} from './components/movies/movies-sidebar/movies-sid
 import {MoviesListComponent} from './components/movies/movies-list/movies-list.component';
 import {initializer} from './utils/app-init';
 import {KeycloakAngularModule, KeycloakService} from 'keycloak-angular';
+import { SyncComponent } from './components/sync/sync.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import {KeycloakAngularModule, KeycloakService} from 'keycloak-angular';
     UserListComponent,
     LdapSettingsComponent,
     MoviesComponent,
-    MoviesListComponent
+    MoviesListComponent,
+    SyncComponent
   ],
   imports: [
     BrowserModule,

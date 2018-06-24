@@ -11,6 +11,7 @@ import {UserListComponent} from './components/settings/users-settings/users-list
 import {LdapSettingsComponent} from './components/settings/ldap-settings/ldap-settings.component';
 import {MoviesListComponent} from './components/movies/movies-list/movies-list.component';
 import {AppAuthGuard} from './app.authguard';
+import {SyncComponent} from './components/sync/sync.component';
 
 const routes: Routes = [
   { path: 'movies', component: MoviesComponent,
@@ -24,7 +25,7 @@ const routes: Routes = [
     canActivate: [AppAuthGuard]},
   { path: 'downloads', component: MoviesComponent ,
     canActivate: [AppAuthGuard]},
-  { path: 'sync', component: MoviesComponent ,
+  { path: 'sync', component: SyncComponent ,
     canActivate: [AppAuthGuard]},
   { path: 'settings', component: SettingsComponent,
     canActivate: [AppAuthGuard],

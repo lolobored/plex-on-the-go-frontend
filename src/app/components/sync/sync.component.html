@@ -1,0 +1,37 @@
+<mat-card>
+  <div class="example-container mat-elevation-z8">
+
+    <mat-table [dataSource]="dataSource" matSort>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="title">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Name</mat-header-cell>
+        <mat-cell *matCellDef="let conversion"> {{conversion.title}}</mat-cell>
+      </ng-container>
+
+      <!-- Percentage Column -->
+      <ng-container matColumnDef="progress">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Progress</mat-header-cell>
+        <mat-cell *matCellDef="let conversion"> {{conversion.percentage}}</mat-cell>
+      </ng-container>
+
+      <!-- Role Column -->
+      <ng-container matColumnDef="remaining">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Estimation</mat-header-cell>
+        <mat-cell *matCellDef="let conversion"> {{conversion.estimatedRemaining}}</mat-cell>
+      </ng-container>
+
+      <!-- Role Column -->
+      <ng-container matColumnDef="elapsed">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Elapsed</mat-header-cell>
+        <mat-cell *matCellDef="let conversion"> {{conversion.elapsedTime}}</mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;">
+      </mat-row>
+    </mat-table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div>
+</mat-card>
