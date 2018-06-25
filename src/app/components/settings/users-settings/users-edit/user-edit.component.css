@@ -1,29 +1,22 @@
-.user-edit-container {
-  display: flex;
-  flex-direction: column;
-}
 
-.basic-container {
-  padding: 5px;
-}
 
-.example-card {
+
+.user-card {
   max-width: 100%;
 }
 
-.user-edit-container > * {
-  width: 40%;
+.example-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
 }
 
-.user-edit-field > * {
+.example-form {
+  max-width: 500px;
   width: 100%;
 }
 
-.mat-form-field.mat-form-field {
-  width: auto;
+.example-full-width {
+  max-width: 500px;
+  width: 100%;
 }
-.user-edit-buttons{
-  display: flex;
-  align-items: right;
-  justify-content: space-around;
-}
+

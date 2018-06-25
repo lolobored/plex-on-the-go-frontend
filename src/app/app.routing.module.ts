@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 
-import { MoviesComponent } from './components/movies/movies.component';
+import {MoviesComponent} from './components/movies/movies.component';
 import {SettingsComponent} from './components/settings/settings.component';
 import {ElasticsearchComponent} from './components/settings/elasticsearch/elasticsearch.component';
 import {PlexComponent} from './components/settings/plex/plex.component';
@@ -14,44 +14,75 @@ import {AppAuthGuard} from './app.authguard';
 import {SyncComponent} from './components/sync/sync.component';
 
 const routes: Routes = [
-  { path: 'movies', component: MoviesComponent,
+  {
+    path: 'movies', component: MoviesComponent,
     canActivate: [AppAuthGuard],
     children: [
-      {path: '', component: MoviesListComponent,
-        canActivate: [AppAuthGuard]}
-      ]
+      {
+        path: '', component: MoviesListComponent,
+        canActivate: [AppAuthGuard]
+      }
+    ]
   },
-  { path: 'tvshows', component: MoviesComponent ,
-    canActivate: [AppAuthGuard]},
-  { path: 'downloads', component: MoviesComponent ,
-    canActivate: [AppAuthGuard]},
-  { path: 'sync', component: SyncComponent ,
-    canActivate: [AppAuthGuard]},
-  { path: 'settings', component: SettingsComponent,
+  {
+    path: 'tvshows', component: MoviesComponent,
+    canActivate: [AppAuthGuard]
+  },
+  {
+    path: 'downloads', component: MoviesComponent,
+    canActivate: [AppAuthGuard]
+  },
+  {
+    path: 'sync', component: SyncComponent,
+    canActivate: [AppAuthGuard]
+  },
+  {
+    path: 'settings', component: SettingsComponent,
     canActivate: [AppAuthGuard],
+    data: {
+      roles: ['admin']
+    },
     children: [
-      {path: 'users', component: UsersSettingsComponent,
+      {
+        path: 'users', component: UsersSettingsComponent,
         canActivate: [AppAuthGuard],
         children: [
-          {path: '', component: UserListComponent,
-            canActivate: [AppAuthGuard]},
-          {path: 'add', component: UserEditComponent,
-            canActivate: [AppAuthGuard]},
-          {path: 'edit', children: [
-              {path: ':id', component: UserEditComponent,
-                canActivate: [AppAuthGuard]}
-            ]}
+          {
+            path: '', component: UserListComponent,
+            canActivate: [AppAuthGuard]
+          },
+          {
+            path: 'add', component: UserEditComponent,
+            canActivate: [AppAuthGuard]
+          },
+          {
+            path: 'edit', children: [
+              {
+                path: ':id', component: UserEditComponent,
+                canActivate: [AppAuthGuard]
+              }
+            ]
+          }
         ]
       },
-      {path: 'ldap', component: LdapSettingsComponent,
-        canActivate: [AppAuthGuard]},
-      {path: 'plex', component: PlexComponent,
-        canActivate: [AppAuthGuard]},
-      {path: 'plex-on-the-go', component: ElasticsearchComponent,
-        canActivate: [AppAuthGuard]},
-      {path: 'elasticsearch', component: ElasticsearchComponent,
-        canActivate: [AppAuthGuard]}
-    ]}
+      {
+        path: 'ldap', component: LdapSettingsComponent,
+        canActivate: [AppAuthGuard]
+      },
+      {
+        path: 'plex', component: PlexComponent,
+        canActivate: [AppAuthGuard]
+      },
+      {
+        path: 'plex-on-the-go', component: ElasticsearchComponent,
+        canActivate: [AppAuthGuard]
+      },
+      {
+        path: 'elasticsearch', component: ElasticsearchComponent,
+        canActivate: [AppAuthGuard]
+      }
+    ]
+  }
 ];
 
 @NgModule({
@@ -64,4 +95,5 @@ const routes: Routes = [
   providers: [AppAuthGuard],
   declarations: []
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}
