@@ -18,7 +18,7 @@ export class NavbarComponent implements OnInit {
 
   username: string;
   user: User;
-  userId: number;
+  userId: string;
 
   constructor(private keycloakService: KeycloakService, private userService: UsersService) {
     this.username = this.keycloakService.getUsername();

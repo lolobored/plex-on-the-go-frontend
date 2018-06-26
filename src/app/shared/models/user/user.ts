@@ -1,14 +1,16 @@
 export class User {
 
-  id: number;
+  id: string;
   userName: string;
+  password: string;
   plexLogin: string;
   plexPassword: string;
   plexToken: string;
   plexTokenValidated: boolean;
+  homeDirectory: string;
+  admin: boolean;
 
   constructor() {
-    this.id = 0;
     this.plexToken = '';
     this.plexTokenValidated = false;
   }
