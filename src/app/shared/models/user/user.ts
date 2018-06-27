@@ -8,6 +8,7 @@ export class User {
   plexToken: string;
   plexTokenValidated: boolean;
   homeDirectory: string;
+  ownership: string;
   admin: boolean;
 
   constructor() {

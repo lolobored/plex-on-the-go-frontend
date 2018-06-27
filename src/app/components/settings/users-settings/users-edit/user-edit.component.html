@@ -38,16 +38,20 @@
         <input matInput placeholder="Home Directory" [(ngModel)]="user.homeDirectory" name="homedirectory">
       </mat-form-field>
       <br>
+      <mat-form-field class="user-edit-full-width">
+        <input matInput placeholder="Ownership" [(ngModel)]="user.ownership" name="ownership">
+      </mat-form-field>
+      <br>
 
       <mat-form-field class="user-edit-full-width">
-        <input matInput placeholder="Plex email" [(ngModel)]="user.plexLogin"
+        <input matInput placeholder="Plex email" name="plexLogin" [(ngModel)]="user.plexLogin"
                [formControl]="emailFormControl"
                [errorStateMatcher]="matcher">
       </mat-form-field>
 
       <br>
       <mat-form-field class="user-edit-full-width">
-        <input matInput placeholder="Plex password" [(ngModel)]="user.plexPassword"
+        <input matInput placeholder="Plex password" name="plexPassword" [(ngModel)]="user.plexPassword"
                [type]="hidePlexPassword ? 'password' : 'text'">
 
         <mat-icon matSuffix (click)="hidePlexPassword = !hidePlexPassword">{{hidePlexPassword ? 'visibility' :
