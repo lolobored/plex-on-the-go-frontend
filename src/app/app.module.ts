@@ -10,9 +10,28 @@ import {HttpClientModule} from '@angular/common/http';
 
 
 import {
-  MatPaginatorModule, MatTableModule, MatInputModule, MatSlideToggleModule, MatGridListModule,
-  MatIconModule, MatMenuModule, MatToolbarModule, MatCardModule, MatButtonModule, MatTabsModule, MatExpansionModule, MatSidenavModule,
-  MatSortModule, MatDividerModule, MatOptionModule, MatSelectModule, MatListModule, MatCheckboxModule, MatSliderModule, MatProgressBarModule
+  MatPaginatorModule,
+  MatTableModule,
+  MatInputModule,
+  MatSlideToggleModule,
+  MatGridListModule,
+  MatIconModule,
+  MatMenuModule,
+  MatToolbarModule,
+  MatCardModule,
+  MatButtonModule,
+  MatTabsModule,
+  MatExpansionModule,
+  MatSidenavModule,
+  MatSortModule,
+  MatDividerModule,
+  MatOptionModule,
+  MatSelectModule,
+  MatListModule,
+  MatCheckboxModule,
+  MatSliderModule,
+  MatProgressBarModule,
+  MatSnackBarModule
 } from '@angular/material';
 import { LoginComponent } from './components/login/login.component';
 import { UserComponent } from './components/login/user/user.component';
@@ -37,6 +56,8 @@ import {initializer} from './utils/app-init';
 import {KeycloakAngularModule, KeycloakService} from 'keycloak-angular';
 import { SyncComponent } from './components/sync/sync.component';
 import {ConversionsService} from './components/sync/conversions.service';
+import { ProfileComponent } from './components/profile/profile.component';
+import {PlexService} from './components/settings/users-settings/plex.service';
 
 @NgModule({
   declarations: [
@@ -53,7 +74,8 @@ import {ConversionsService} from './components/sync/conversions.service';
     LdapSettingsComponent,
     MoviesComponent,
     MoviesListComponent,
-    SyncComponent
+    SyncComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -82,6 +104,7 @@ import {ConversionsService} from './components/sync/conversions.service';
     MatTabsModule,
     MatSidenavModule,
     MatDividerModule,
+    MatSnackBarModule,
     BrowserAnimationsModule,
     MatExpansionModule,
     ReactiveFormsModule,
@@ -95,6 +118,7 @@ import {ConversionsService} from './components/sync/conversions.service';
     ThemeStorage,
     ComponentPageTitle,
     ConversionsService,
+    PlexService,
     {
       provide: APP_INITIALIZER,
       useFactory: initializer,

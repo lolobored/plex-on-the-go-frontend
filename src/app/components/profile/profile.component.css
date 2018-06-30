@@ -1,0 +1,19 @@
+.user-card {
+  max-width: 100%;
+}
+
+.example-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}
+
+.user-edit-form {
+  max-width: 500px;
+  width: 100%;
+}
+
+.user-edit-full-width {
+  max-width: 500px;
+  width: 100%;
+}
+

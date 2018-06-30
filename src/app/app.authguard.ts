@@ -16,19 +16,16 @@ export class AppAuthGuard extends KeycloakAuthGuard {
       }
 
       const requiredRoles = route.data.roles;
-      console.log(this.roles);
-      console.log(requiredRoles);
+
       if (!requiredRoles || requiredRoles.length === 0) {
         return resolve(true);
       } else {
-        console.log('else');
+
         if (!this.roles || this.roles.length === 0) {
           resolve(false);
         }
         let granted: boolean = false;
         for (const requiredRole of requiredRoles) {
-          console.log('requiredRole' + requiredRole);
-          console.log('this.roles.indexOf(requiredRole)' + this.roles.indexOf(requiredRole));
           if (this.roles.indexOf(requiredRole) > -1) {
             granted = true;
             break;

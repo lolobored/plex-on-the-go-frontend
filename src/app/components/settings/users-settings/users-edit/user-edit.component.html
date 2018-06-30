@@ -6,70 +6,125 @@
   </mat-card-header>
 
   <mat-card-content>
-    <form class="user-edit-form">
+    <form
+      novalidate
+      [formGroup]="userRegistrationForm"
+      (ngSubmit)="editUser()">
       <mat-form-field class="user-edit-full-width">
-        <input required matInput placeholder="Username" name="username" [(ngModel)]="user.userName">
+        <input required matInput placeholder="Username" name="username" [(ngModel)]="user.userName"
+               formControlName="usernameCheck">
+        <mat-error *ngIf="userNameFormControl.hasError('minlength') &&
+                          !userNameFormControl.hasError('pattern') &&
+                          !userNameFormControl.hasError('required')">
+          Username should be at least <strong>5</strong> characters long
+        </mat-error>
+        <mat-error *ngIf="userNameFormControl.hasError('pattern') &&
+                          !userNameFormControl.hasError('required')">
+          Username should only contain lower case and numerics
+        </mat-error>
+        <mat-error *ngIf="userNameFormControl.hasError('required')">
+          Username is <strong>required</strong>
+        </mat-error>
       </mat-form-field>
       <br>
       <mat-form-field class="user-edit-full-width">
-        <input matInput placeholder="First Name" name="firstname" [(ngModel)]="user.firstName">
-      </mat-form-field>
-      <mat-form-field class="user-edit-full-width">
-        <input matInput placeholder="Last Name" name="lastname" [(ngModel)]="user.lastName">
-      </mat-form-field>
-      <mat-form-field class="user-edit-full-width">
-        <input matInput placeholder="Password" [(ngModel)]="user.password" name="password" required
-               [type]="hideUserPassword ? 'password' : 'text'"
-               [formControl]="passwordFormControl">
-        <mat-icon matSuffix (click)="hideUserPassword = !hideUserPassword">{{hideUserPassword ? 'visibility' :
-          'visibility_off'}}
-        </mat-icon>
-      </mat-form-field>
-      <mat-form-field class="user-edit-full-width">
-        <input matInput placeholder="Repeat Password" required
-               [type]="hideUserRepeatPassword ? 'password' : 'text'"
-               [formControl]="passwordFormControl">
-        <mat-icon matSuffix (click)="hideUserRpeatPassword = !hideUserRepeatPassword">{{hideUserRepeatPassword ? 'visibility' :
-          'visibility_off'}}
-        </mat-icon>
+        <input matInput placeholder="First Name" name="firstname" [(ngModel)]="user.firstName"
+               [ngModelOptions]="{standalone: true}">
       </mat-form-field>
       <br>
       <mat-form-field class="user-edit-full-width">
-        <input matInput placeholder="Home Directory" [(ngModel)]="user.homeDirectory" name="homedirectory">
+        <input matInput placeholder="Last Name" name="lastname" [(ngModel)]="user.lastName"
+               [ngModelOptions]="{standalone: true}">
+      </mat-form-field>
+
+      <div formGroupName="passwordGroup">
+        <mat-form-field class="user-edit-full-width">
+          <input matInput placeholder="Password" [(ngModel)]="user.password" name="password"
+                 [type]="hideUserPassword ? 'password' : 'text'"
+                 formControlName="password"
+                 required="{{!this.editMode}}"
+          >
+          <mat-icon matSuffix (click)="hideUserPassword = !hideUserPassword">{{hideUserPassword ? 'visibility' :
+            'visibility_off'}}
+          </mat-icon>
+          <mat-error *ngIf="passwordFormControl.hasError('password')
+                        && !passwordFormControl.hasError('required')">
+            {{errors.password}}
+          </mat-error>
+          <mat-error *ngIf="passwordFormControl.hasError('required')">
+            Required
+          </mat-error>
+
+        </mat-form-field>
+        <mat-form-field class="user-edit-full-width">
+          <input matInput placeholder="Repeat Password" required
+                 [type]="hideUserRepeatPassword ? 'password' : 'text'"
+                 formControlName="confirmPassword"
+                 [errorStateMatcher]="confirmValidParentMatcher"
+                 required="{{!this.editMode}}"
+          >
+          <mat-error *ngIf="confirmPasswordFormControl.parent.hasError('childrenNotEqual')
+                            && !confirmPasswordFormControl.hasError('required')">
+            Passwords do not match
+          </mat-error>
+          <mat-error *ngIf="confirmPasswordFormControl.hasError('required')">
+            Required
+          </mat-error>
+          <mat-icon matSuffix
+                    (click)="hideUserRepeatPassword = !hideUserRepeatPassword">
+            {{hideUserRepeatPassword ?
+            'visibility' :
+            'visibility_off'}}
+          </mat-icon>
+        </mat-form-field>
+      </div>
+      <br>
+      <mat-form-field class="user-edit-full-width">
+        <input matInput placeholder="Home Directory" [(ngModel)]="user.homeDirectory"
+               [ngModelOptions]="{standalone: true}" name="homedirectory">
       </mat-form-field>
       <br>
       <mat-form-field class="user-edit-full-width">
-        <input matInput placeholder="Ownership" [(ngModel)]="user.ownership" name="ownership">
+        <input matInput placeholder="Ownership" [(ngModel)]="user.ownership" [ngModelOptions]="{standalone: true}"
+               name="ownership">
       </mat-form-field>
       <br>
 
       <mat-form-field class="user-edit-full-width">
-        <input matInput placeholder="Plex email" name="plexLogin" [(ngModel)]="user.plexLogin"
-               [formControl]="emailFormControl"
-               [errorStateMatcher]="matcher">
+        <input matInput placeholder="Plex email" [(ngModel)]="user.plexLogin"
+               formControlName="emailCheck"
+               name="plexLogin">
+        <mat-error *ngIf="emailFormControl.hasError('emailOptional')">
+           Plex email should be under the form <strong>xxxxxxxx@yyyyyy.zzz</strong>
+        </mat-error>
       </mat-form-field>
-
       <br>
       <mat-form-field class="user-edit-full-width">
-        <input matInput placeholder="Plex password" name="plexPassword" [(ngModel)]="user.plexPassword"
+        <input matInput placeholder="Plex password" name="plexPassword" [ngModelOptions]="{standalone: true}"
+               [(ngModel)]="user.plexPassword"
                [type]="hidePlexPassword ? 'password' : 'text'">
 
         <mat-icon matSuffix (click)="hidePlexPassword = !hidePlexPassword">{{hidePlexPassword ? 'visibility' :
           'visibility_off'}}
         </mat-icon>
       </mat-form-field>
+      <button mat-button type="button" (click)="testPlexLogin()">Test Plex</button>
       <br>
+
+      <mat-slide-toggle
+        class="example-margin"
+        [color]="warn"
+        [checked]="false"
+        name="admin"
+        [(ngModel)]="user.admin"
+        [ngModelOptions]="{standalone: true}">
+        Administrator
+      </mat-slide-toggle>
+      <br>
+      <button mat-button type="button" (click)="cancel()">Cancel</button>
+      <button mat-button
+              type="submit">OK
+      </button>
     </form>
-    <mat-slide-toggle
-      class="example-margin"
-      [color]="warn"
-      [checked]="false"
-      [(ngModel)]="user.admin">
-      Administrator
-    </mat-slide-toggle>
   </mat-card-content>
-  <mat-card-actions>
-    <button mat-button (click)="cancel()">Cancel</button>
-    <button mat-button (click)="editUser()">OK</button>
-  </mat-card-actions>
 </mat-card>

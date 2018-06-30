@@ -1,0 +1,60 @@
+<mat-card class="user-card">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>{{user.userName}}</mat-card-title>
+    <mat-card-subtitle>{{user.firstName}} {{user.lastName}}</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <form class="user-edit-form">
+      <mat-form-field class="user-edit-full-width">
+        <input required matInput placeholder="Username" name="username" disabled="true" [(ngModel)]="user.userName">
+      </mat-form-field>
+      <br>
+      <mat-form-field class="user-edit-full-width">
+        <input matInput placeholder="First Name" name="firstname" [(ngModel)]="user.firstName">
+      </mat-form-field>
+      <mat-form-field class="user-edit-full-width">
+        <input matInput placeholder="Last Name" name="lastname" [(ngModel)]="user.lastName">
+      </mat-form-field>
+      <mat-form-field class="user-edit-full-width">
+        <input matInput placeholder="Password" [(ngModel)]="user.password" name="password" required
+               [type]="hideUserPassword ? 'password' : 'text'"
+               [formControl]="passwordFormControl">
+        <mat-icon matSuffix (click)="hideUserPassword = !hideUserPassword">{{hideUserPassword ? 'visibility' :
+          'visibility_off'}}
+        </mat-icon>
+      </mat-form-field>
+      <mat-form-field class="user-edit-full-width">
+        <input matInput placeholder="Repeat Password" required
+               [type]="hideUserRepeatPassword ? 'password' : 'text'"
+               [formControl]="passwordFormControl">
+        <mat-icon matSuffix (click)="hideUserRpeatPassword = !hideUserRepeatPassword">{{hideUserRepeatPassword ? 'visibility' :
+          'visibility_off'}}
+        </mat-icon>
+      </mat-form-field>
+      <br>
+
+      <mat-form-field class="user-edit-full-width">
+        <input matInput placeholder="Plex email" name="plexLogin" [(ngModel)]="user.plexLogin"
+               [formControl]="emailFormControl"
+               [errorStateMatcher]="matcher">
+      </mat-form-field>
+
+      <br>
+      <mat-form-field class="user-edit-full-width">
+        <input matInput placeholder="Plex password" name="plexPassword" [(ngModel)]="user.plexPassword"
+               [type]="hidePlexPassword ? 'password' : 'text'">
+
+        <mat-icon matSuffix (click)="hidePlexPassword = !hidePlexPassword">{{hidePlexPassword ? 'visibility' :
+          'visibility_off'}}
+        </mat-icon>
+      </mat-form-field>
+      <br>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button (click)="cancel()">Cancel</button>
+    <button mat-button (click)="editUser()">OK</button>
+  </mat-card-actions>
+</mat-card>
