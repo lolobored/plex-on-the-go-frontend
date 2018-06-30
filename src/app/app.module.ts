@@ -56,8 +56,8 @@ import {initializer} from './utils/app-init';
 import {KeycloakAngularModule, KeycloakService} from 'keycloak-angular';
 import { SyncComponent } from './components/sync/sync.component';
 import {ConversionsService} from './components/sync/conversions.service';
-import { ProfileComponent } from './components/profile/profile.component';
 import {PlexService} from './components/settings/users-settings/plex.service';
+import {UserServiceAuth} from './utils/user-service-auth';
 
 @NgModule({
   declarations: [
@@ -74,8 +74,7 @@ import {PlexService} from './components/settings/users-settings/plex.service';
     LdapSettingsComponent,
     MoviesComponent,
     MoviesListComponent,
-    SyncComponent,
-    ProfileComponent
+    SyncComponent
   ],
   imports: [
     BrowserModule,
@@ -118,6 +117,7 @@ import {PlexService} from './components/settings/users-settings/plex.service';
     ThemeStorage,
     ComponentPageTitle,
     ConversionsService,
+    UserServiceAuth,
     PlexService,
     {
       provide: APP_INITIALIZER,

@@ -12,7 +12,6 @@ import {LdapSettingsComponent} from './components/settings/ldap-settings/ldap-se
 import {MoviesListComponent} from './components/movies/movies-list/movies-list.component';
 import {AppAuthGuard} from './app.authguard';
 import {SyncComponent} from './components/sync/sync.component';
-import {ProfileComponent} from './components/profile/profile.component';
 
 const routes: Routes = [
   {
@@ -38,7 +37,7 @@ const routes: Routes = [
     canActivate: [AppAuthGuard]
   },
   {
-    path: 'profile', component: ProfileComponent,
+    path: 'profile', component: UserEditComponent,
     canActivate: [AppAuthGuard]
   },
   {

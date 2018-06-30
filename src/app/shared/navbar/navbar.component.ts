@@ -3,9 +3,10 @@ import {RouterModule} from '@angular/router';
 import {ThemePickerModule} from '../theme-picker/theme-picker';
 import {MatButtonModule, MatIconModule, MatMenuModule, MatTableDataSource} from '@angular/material';
 import {CommonModule} from '@angular/common';
-import {KeycloakService} from 'keycloak-angular';
 import {UsersService} from '../../components/settings/users-settings/users-settings.service';
 import {User} from '../models/user/user';
+import {UserServiceAuth} from '../../utils/user-service-auth';
+import {KeycloakService} from 'keycloak-angular';
 
 
 @Component({
@@ -19,8 +20,10 @@ export class NavbarComponent implements OnInit {
   user: User;
   userId: string;
 
-  constructor(private keycloakService: KeycloakService, private userService: UsersService) {
-    this.username = this.keycloakService.getUsername();
+  constructor(private userService: UsersService,
+              private userAuthService: UserServiceAuth,
+              private keycloakService: KeycloakService) {
+    this.username = this.userAuthService.getUsername();
     this.userService.getUserByUserName(this.username).subscribe((user: User) => {
         this.user = user;
         this.userId = this.user.id;
@@ -33,6 +36,10 @@ export class NavbarComponent implements OnInit {
 
   logout() {
     this.keycloakService.logout();
+  }
+
+  isAdmin() {
+    return this.userAuthService.isAdmin();
   }
 
 }

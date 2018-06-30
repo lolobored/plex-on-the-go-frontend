@@ -1,4 +1,4 @@
-import {AbstractControl, FormControl, FormGroup, FormGroupDirective, NgForm, ValidatorFn, Validators} from '@angular/forms';
+import {FormControl, FormGroup, FormGroupDirective, NgForm, ValidatorFn, Validators} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material';
 
 /**
@@ -18,14 +18,10 @@ export class CustomValidators {
 
   static customPasswordValidator(editMode : boolean): ValidatorFn {
     return (control: FormControl): {[key: string]: any} => {
-      console.log(editMode);
-      console.log(control.value);
-      console.log('condition ' + (typeof control.value === 'undefined' || control.value === ''));
       if (editMode && (typeof control.value === 'undefined' || control.value === '')) {
         return null;
       } else {
         if (!regExps.password.test(control.value)) {
-          console.log('invalid')
           return {'password': true};
         }
         return null;

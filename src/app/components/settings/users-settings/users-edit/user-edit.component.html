@@ -79,16 +79,17 @@
         </mat-form-field>
       </div>
       <br>
-      <mat-form-field class="user-edit-full-width">
+      <mat-form-field class="user-edit-full-width" *ngIf="isAdmin()">
         <input matInput placeholder="Home Directory" [(ngModel)]="user.homeDirectory"
                [ngModelOptions]="{standalone: true}" name="homedirectory">
+        <br>
       </mat-form-field>
-      <br>
-      <mat-form-field class="user-edit-full-width">
+      <mat-form-field class="user-edit-full-width" *ngIf="isAdmin()">
         <input matInput placeholder="Ownership" [(ngModel)]="user.ownership" [ngModelOptions]="{standalone: true}"
                name="ownership">
+        <br>
       </mat-form-field>
-      <br>
+
 
       <mat-form-field class="user-edit-full-width">
         <input matInput placeholder="Plex email" [(ngModel)]="user.plexLogin"
@@ -117,7 +118,8 @@
         [checked]="false"
         name="admin"
         [(ngModel)]="user.admin"
-        [ngModelOptions]="{standalone: true}">
+        [ngModelOptions]="{standalone: true}"
+        *ngIf="isAdmin()">
         Administrator
       </mat-slide-toggle>
       <br>

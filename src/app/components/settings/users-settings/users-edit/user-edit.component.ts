@@ -1,24 +1,24 @@
 import {Component, NgModule, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ComponentPageTitle} from '../../../../shared/page-title/page-title';
+import {MatSnackBar} from '@angular/material';
 import {User} from '../../../../shared/models/user/user';
 import {UsersService} from '../users-settings.service';
 import {ActivatedRoute, Params, Router} from '@angular/router';
-import { Location } from '@angular/common';
+import {Location} from '@angular/common';
 import {
-  CustomValidators,
-  ConfirmValidParentMatcher,
+  ConfirmValidParentMatcher, CustomValidators,
   errorMessages
 } from './custom.validator';
 import {PlexService} from '../plex.service';
-import {MatSnackBar} from '@angular/material';
+import {UserServiceAuth} from '../../../../utils/user-service-auth';
 
 
 
 
 @NgModule({
   providers: [UsersService,
-  PlexService]
+    PlexService]
 })
 
 @Component({
@@ -50,17 +50,18 @@ export class UserEditComponent implements OnInit {
               private _route: ActivatedRoute,
               private routerService: Router,
               private location: Location,
-              private formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder,
+              private userAuthService: UserServiceAuth) {
 
   }
 
   createForm() {
     this.userNameFormControl = new FormControl({value: this.user.userName, disabled: this.editMode},
       [
-      Validators.required,
-      Validators.minLength(5),
-      Validators.pattern('[a-z0-9]+')
-    ]);
+        Validators.required,
+        Validators.minLength(5),
+        Validators.pattern('[a-z0-9]+')
+      ]);
 
     this.passwordFormControl = new FormControl('', [
       CustomValidators.customPasswordValidator(this.editMode)
@@ -74,12 +75,12 @@ export class UserEditComponent implements OnInit {
 
     this.userRegistrationForm =
       new FormGroup({
-      usernameCheck: this.userNameFormControl,
-      emailCheck: this.emailFormControl,
+        usernameCheck: this.userNameFormControl,
+        emailCheck: this.emailFormControl,
         passwordGroup: this.formBuilder.group({
           password: this.passwordFormControl,
           confirmPassword: this.confirmPasswordFormControl
-        }, { validator: CustomValidators.childrenEqual})
+        }, {validator: CustomValidators.childrenEqual})
       });
 
   }
@@ -93,14 +94,21 @@ export class UserEditComponent implements OnInit {
   }
 
   initializeUser(res: Params): void {
-    if (res.id === undefined) {
-      this.user = new User();
-      this.editMode = false;
-    } else {
-      this.userService.getUser(res.id).subscribe((user: User) =>
+    if (location.pathname === '/profile') {
+      this.userService.getUserByUserName(this.userAuthService.getUsername()).subscribe((user: User) =>
         this.user = user
       );
       this.editMode = true;
+    } else {
+      if (res.id === undefined) {
+        this.user = new User();
+        this.editMode = false;
+      } else {
+        this.userService.getUser(res.id).subscribe((user: User) =>
+          this.user = user
+        );
+        this.editMode = true;
+      }
     }
   }
 
@@ -126,17 +134,20 @@ export class UserEditComponent implements OnInit {
 
   testPlexLogin() {
     this.plexService.plexLogin(this.user.plexLogin, this.user.plexPassword).subscribe((result: boolean) => {
-      if (result) {
-        this.plexSnackBar.open('Plex Login was successful', 'Ok', {
-          duration: 2000,
-        });
-      } else {
-        this.plexSnackBar.open('Plex Login was unsuccessful', 'Ok', {
-          duration: 2000,
-        });
+        if (result) {
+          this.plexSnackBar.open('Plex Login was successful', 'Ok', {
+            duration: 2000,
+          });
+        } else {
+          this.plexSnackBar.open('Plex Login was unsuccessful', 'Ok', {
+            duration: 2000,
+          });
+        }
       }
-    }
-
     );
+  }
+
+  isAdmin() {
+    return this.userAuthService.isAdmin();
   }
 }
