@@ -35,10 +35,10 @@
         <mat-header-cell *matHeaderCellDef> Convert</mat-header-cell>
         <mat-cell *matCellDef="let row">
           <div class="button-row docs-buttons-hide-small">
-            <button mat-raised-button color="primary" (click)="this.moviesSharedService.addConvert(row)"><mat-icon>library_add</mat-icon>Add</button>
+            <button mat-raised-button [disabled]=row.converted color="primary" (click)="this.moviesSharedService.addConvert(row)"><mat-icon>library_add</mat-icon>Add</button>
           </div>
           <div class="button-row docs-buttons-show-small" >
-            <button mat-mini-fab color="primary" (click)="this.moviesSharedService.addConvert(row)"><mat-icon>library_add</mat-icon></button>
+            <button mat-mini-fab color="primary" [disabled]=row.converted (click)="this.moviesSharedService.addConvert(row)"><mat-icon>library_add</mat-icon></button>
           </div>
         </mat-cell>
       </ng-container>

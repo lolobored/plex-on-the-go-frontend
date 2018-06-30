@@ -31,7 +31,6 @@ export class SyncComponent implements OnInit {
     this.username = this.keycloakService.getUsername();
 
     this.conversionService.getConversions(this.username).subscribe((data: Conversion[]) => {
-      console.log(data);
       this.conversions = data;
       this.dataSource = new MatTableDataSource(this.conversions);
       this.dataSource.paginator = this.paginator;

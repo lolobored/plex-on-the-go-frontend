@@ -5,6 +5,7 @@ export class Media {
 
   type: string;
   library: string;
+  converted: boolean;
   user: string;
   title: string;
   fileLocation: string;
