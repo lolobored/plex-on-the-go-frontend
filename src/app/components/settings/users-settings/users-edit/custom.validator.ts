@@ -15,8 +15,9 @@ export class CustomValidators {
     return isValid ? null : {childrenNotEqual: true};
   };
 
-  static customPasswordValidator: ValidatorFn = (editMode : boolean) => {
-    return (control: AbstractControl): { [key: string]: boolean } | {} => {
+
+  static customPasswordValidator(editMode : boolean): ValidatorFn {
+    return (control: FormControl): {[key: string]: any} => {
       console.log(editMode);
       console.log(control.value);
       console.log('condition ' + (typeof control.value === 'undefined' || control.value === ''));
@@ -32,7 +33,7 @@ export class CustomValidators {
     };
   }
 
-  static customEmailValidator(control: AbstractControl): { [key: string]: any } {
+  static customEmailValidator(control: FormControl): { [key: string]: any } {
     const emailError = Validators.email(control);
 
     if (typeof control.value !== 'undefined' && control.value && emailError) {

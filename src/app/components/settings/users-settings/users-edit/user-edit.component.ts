@@ -1,7 +1,6 @@
 import {Component, NgModule, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ComponentPageTitle} from '../../../../shared/page-title/page-title';
-import {ErrorStateMatcher, MatSnackBar} from '@angular/material';
 import {User} from '../../../../shared/models/user/user';
 import {UsersService} from '../users-settings.service';
 import {ActivatedRoute, Params, Router} from '@angular/router';
@@ -9,12 +8,10 @@ import { Location } from '@angular/common';
 import {
   CustomValidators,
   ConfirmValidParentMatcher,
-  regExps,
-  errorMessages,
-  customPasswordValidator,
-  customEmailValidator
+  errorMessages
 } from './custom.validator';
 import {PlexService} from '../plex.service';
+import {MatSnackBar} from '@angular/material';
 
 
 
@@ -41,7 +38,7 @@ export class UserEditComponent implements OnInit {
   userRegistrationForm: FormGroup;
   errors = errorMessages;
   userNameFormControl: FormControl;
-  emailFormControl = FormControl;
+  emailFormControl: FormControl;
   passwordFormControl: FormControl;
   confirmPasswordFormControl: FormControl;
 
