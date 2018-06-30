@@ -56,7 +56,7 @@ export class ConfirmValidParentMatcher implements ErrorStateMatcher {
  * Collection of reusable RegExps
  */
 export const regExps: { [key: string]: RegExp } = {
-  password: /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,100}$/,
+  password: /^.{7,100}$/,
   email: /(^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,}))$/i
 };
 
