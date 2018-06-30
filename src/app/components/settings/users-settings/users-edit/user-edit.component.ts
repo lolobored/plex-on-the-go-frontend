@@ -94,8 +94,7 @@ export class UserEditComponent implements OnInit {
   }
 
   initializeUser(res: Params): void {
-    console.log(location.pathname);
-    if (location.pathname === '/profile') {
+    if (location.pathname.endsWith('/profile')) {
       this.userService.getUserByUserName(this.userAuthService.getUsername()).subscribe((user: User) =>
         this.user = user
       );
