@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import {environment} from '../../../../environments/properties';
-import {User} from '../../../shared/models/user/user';
+import {PlexUser} from '../../../shared/models/plexusers/plexuser';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -16,9 +16,9 @@ export class PlexService {
   private plexUrlLogin = environment.apiUrl + '/plex/login';
 
   public plexLogin(login: string, password: string) {
-    const testUser = new User();
-    testUser.plexLogin = login;
-    testUser.plexPassword = password;
+    const testUser = new PlexUser();
+    testUser.username = login;
+    testUser.password = password;
     return this.http.post(this.plexUrlLogin, testUser, httpOptions);
   }
 }

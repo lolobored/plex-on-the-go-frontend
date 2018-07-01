@@ -8,6 +8,7 @@ import {Subscriber} from 'rxjs/Subscriber';
 import {Search} from '../../../shared/models/search/search';
 import {environment} from '../../../../environments/properties';
 import {Media} from '../../../shared/models/media/media';
+import {PlexUser} from '../../../shared/models/plexusers/plexuser';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -26,8 +27,8 @@ export class MoviesRestService {
   private addMovie = environment.apiUrl + '/conversions/add';
 
 
-  public getMovies(user: string) {
-    return this.http.post(this.moviesUrl, user, httpOptions);
+  public getMovies() {
+    return this.http.get(this.moviesUrl);
   }
 
   public getGenre() {

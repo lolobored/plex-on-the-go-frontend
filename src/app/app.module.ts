@@ -44,7 +44,6 @@ import {ThemeStorage} from './shared/theme-picker/theme-storage/theme-storage';
 import {StyleManager} from './shared/style-manager';
 import {ComponentPageTitle} from './shared/page-title/page-title';
 import {SettingsSidenavModule} from './components/settings/sidebar/settings-sidenav';
-import { PlexComponent } from './components/settings/plex/plex.component';
 import { UsersSettingsComponent } from './components/settings/users-settings/users-settings.component';
 import {UserListComponent} from './components/settings/users-settings/users-list/users-list.component';
 import {UserEditComponent} from './components/settings/users-settings/users-edit/user-edit.component';
@@ -58,6 +57,10 @@ import { SyncComponent } from './components/sync/sync.component';
 import {ConversionsService} from './components/sync/conversions.service';
 import {PlexService} from './components/settings/users-settings/plex.service';
 import {UserServiceAuth} from './utils/user-service-auth';
+import {PlexSettingsComponent} from './components/settings/plex-settings/plex-settings.component';
+import {PlexUserService} from './components/settings/plex-settings/plex-settings.service';
+import {PlexUsersListComponent} from './components/settings/plex-settings/plex-users-list/plex-users-list.component';
+import {PlexEditComponent} from './components/settings/plex-settings/plex-edit/plex-edit.component';
 
 @NgModule({
   declarations: [
@@ -67,13 +70,15 @@ import {UserServiceAuth} from './utils/user-service-auth';
     MainMenuComponent,
     SettingsComponent,
     ElasticsearchComponent,
-    PlexComponent,
     UsersSettingsComponent,
     UserEditComponent,
+    PlexEditComponent,
     UserListComponent,
+    PlexUsersListComponent,
     LdapSettingsComponent,
     MoviesComponent,
     MoviesListComponent,
+    PlexSettingsComponent,
     SyncComponent
   ],
   imports: [
@@ -119,6 +124,7 @@ import {UserServiceAuth} from './utils/user-service-auth';
     ConversionsService,
     UserServiceAuth,
     PlexService,
+    PlexUserService,
     {
       provide: APP_INITIALIZER,
       useFactory: initializer,

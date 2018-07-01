@@ -1,0 +1,58 @@
+<mat-card>
+  <button mat-raised-button color="primary" routerLink="/settings/plex/add">
+    <mat-icon>add_circle</mat-icon>
+    Add a user
+  </button>
+</mat-card>
+<mat-card>
+  <div class="example-header">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+
+  </div>
+
+  <div class="example-container mat-elevation-z8">
+
+    <mat-table [dataSource]="dataSource" matSort>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="server">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Server</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.machineName}}</mat-cell>
+      </ng-container>
+
+      <!-- Role Column -->
+      <!-- <ng-container matColumnDef="role">
+         <mat-header-cell *matHeaderCellDef mat-sort-header> Role</mat-header-cell>
+         <mat-cell *matCellDef="let row"> {{row.role}}</mat-cell>
+       </ng-container> -->
+
+
+       <!-- Plex Token Column -->
+      <ng-container matColumnDef="username">
+        <mat-header-cell *matHeaderCellDef> Username</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.username}}</mat-cell>
+      </ng-container>
+
+      <!-- Edit User -->
+      <ng-container matColumnDef="delete">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <div class="button-row docs-buttons-hide-small">
+            <button mat-raised-button color="warn" (click)="deletePlexUsers(row)"><mat-icon>delete</mat-icon>Delete</button>
+          </div>
+          <div class="button-row docs-buttons-show-small" >
+            <button mat-mini-fab color="warn" (click)="deletePlexUsers(row)"><mat-icon>delete</mat-icon></button>
+          </div>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;">
+      </mat-row>
+    </mat-table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div>
+</mat-card>

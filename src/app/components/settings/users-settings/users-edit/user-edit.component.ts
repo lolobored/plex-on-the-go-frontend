@@ -1,7 +1,7 @@
 import {Component, NgModule, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ComponentPageTitle} from '../../../../shared/page-title/page-title';
-import {MatSnackBar} from '@angular/material';
+import {MatSnackBar, MatTableDataSource} from '@angular/material';
 import {User} from '../../../../shared/models/user/user';
 import {UsersService} from '../users-settings.service';
 import {ActivatedRoute, Params, Router} from '@angular/router';
@@ -12,8 +12,14 @@ import {
 } from './custom.validator';
 import {PlexService} from '../plex.service';
 import {UserServiceAuth} from '../../../../utils/user-service-auth';
+import {PlexUser} from '../../../../shared/models/plexusers/plexuser';
+import {PlexUserService} from '../../plex-settings/plex-settings.service';
 
 
+export class PlexUserSelect {
+  value: PlexUser;
+  viewValue: string;
+}
 
 
 @NgModule({
@@ -42,6 +48,10 @@ export class UserEditComponent implements OnInit {
   passwordFormControl: FormControl;
   confirmPasswordFormControl: FormControl;
 
+  plexUsers: PlexUser[];
+
+  selections: PlexUserSelect[];
+
 
   constructor(public _componentPageTitle: ComponentPageTitle,
               private userService: UsersService,
@@ -51,7 +61,8 @@ export class UserEditComponent implements OnInit {
               private routerService: Router,
               private location: Location,
               private formBuilder: FormBuilder,
-              private userAuthService: UserServiceAuth) {
+              private userAuthService: UserServiceAuth,
+              private plexUserService: PlexUserService) {
 
   }
 
@@ -89,6 +100,17 @@ export class UserEditComponent implements OnInit {
   ngOnInit(): void {
     this._componentPageTitle.title = 'Settings - User';
     this._route.params.subscribe(res => this.initializeUser(res));
+    this.plexUserService.getUsers()
+      .subscribe( (data: PlexUser[]) => {
+        this.plexUsers = data;
+        this.selections = [];
+        for (const plexUser of this.plexUsers) {
+          const userSelect = new PlexUserSelect();
+          userSelect.value = plexUser;
+          userSelect.viewValue = plexUser.machineName + ' ' + plexUser.username;
+          this.selections.push(userSelect);
+        }
+      });
     this.createForm();
 
   }
@@ -130,21 +152,6 @@ export class UserEditComponent implements OnInit {
   cancel(): void {
 
     this.location.back();
-  }
-
-  testPlexLogin() {
-    this.plexService.plexLogin(this.user.plexLogin, this.user.plexPassword).subscribe((result: boolean) => {
-        if (result) {
-          this.plexSnackBar.open('Plex Login was successful', 'Ok', {
-            duration: 2000,
-          });
-        } else {
-          this.plexSnackBar.open('Plex Login was unsuccessful', 'Ok', {
-            duration: 2000,
-          });
-        }
-      }
-    );
   }
 
   isAdmin() {

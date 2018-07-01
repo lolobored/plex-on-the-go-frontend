@@ -1,6 +1,5 @@
 export class Search {
 
-  user: string;
   title: string;
   yearFrom: number;
   yearTo: number;

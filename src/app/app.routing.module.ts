@@ -4,7 +4,6 @@ import {RouterModule, Routes} from '@angular/router';
 import {MoviesComponent} from './components/movies/movies.component';
 import {SettingsComponent} from './components/settings/settings.component';
 import {ElasticsearchComponent} from './components/settings/elasticsearch/elasticsearch.component';
-import {PlexComponent} from './components/settings/plex/plex.component';
 import {UsersSettingsComponent} from './components/settings/users-settings/users-settings.component';
 import {UserEditComponent} from './components/settings/users-settings/users-edit/user-edit.component';
 import {UserListComponent} from './components/settings/users-settings/users-list/users-list.component';
@@ -12,6 +11,9 @@ import {LdapSettingsComponent} from './components/settings/ldap-settings/ldap-se
 import {MoviesListComponent} from './components/movies/movies-list/movies-list.component';
 import {AppAuthGuard} from './app.authguard';
 import {SyncComponent} from './components/sync/sync.component';
+import {PlexSettingsComponent} from './components/settings/plex-settings/plex-settings.component';
+import {PlexUsersListComponent} from './components/settings/plex-settings/plex-users-list/plex-users-list.component';
+import {PlexEditComponent} from './components/settings/plex-settings/plex-edit/plex-edit.component';
 
 const routes: Routes = [
   {
@@ -74,8 +76,26 @@ const routes: Routes = [
         canActivate: [AppAuthGuard]
       },
       {
-        path: 'plex', component: PlexComponent,
-        canActivate: [AppAuthGuard]
+        path: 'plex', component: PlexSettingsComponent,
+        canActivate: [AppAuthGuard],
+        children: [
+          {
+            path: '', component: PlexUsersListComponent,
+            canActivate: [AppAuthGuard]
+          },
+          {
+            path: 'add', component: PlexEditComponent,
+            canActivate: [AppAuthGuard]
+          },
+          {
+            path: 'edit', children: [
+              {
+                path: ':id', component: PlexEditComponent,
+                canActivate: [AppAuthGuard]
+              }
+            ]
+          }
+        ]
       },
       {
         path: 'plex-on-the-go', component: ElasticsearchComponent,

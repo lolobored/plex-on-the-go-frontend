@@ -5,7 +5,6 @@ import {Search} from '../../../shared/models/search/search';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {KeycloakService} from 'keycloak-angular';
 import {UsersService} from '../../settings/users-settings/users-settings.service';
-import {User} from '../../../shared/models/user/user';
 
 
 @NgModule({
@@ -20,21 +19,15 @@ export class MoviesSharedService {
   paginator: MatPaginator;
   sort: MatSort;
 
-  username: string;
-  plexUserName: string;
 
-  constructor(private moviesService: MoviesRestService, private keycloakService: KeycloakService,
-              private userService: UsersService) {
-    this.username = this.keycloakService.getUsername();
-    this.userService.getUserByUserName(this.username).subscribe((user: User) => {
-      this.plexUserName = user.plexLogin;
-      this.moviesService.getMovies(this.plexUserName).subscribe((data: Media[]) => {
+  constructor(private moviesService: MoviesRestService, private keycloakService: KeycloakService) {
+      this.moviesService.getMovies().subscribe((data: Media[]) => {
         this.movies = data;
         this.dataSource = new MatTableDataSource(this.movies);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       });
-    });
+
   }
 
   selectedGenreList: string[];
@@ -68,7 +61,7 @@ export class MoviesSharedService {
   }
 
   getAllMovies() {
-    this.moviesService.getMovies(this.plexUserName).subscribe((data: Media[]) => {
+    this.moviesService.getMovies().subscribe((data: Media[]) => {
       this.movies = data;
       this.dataSource = new MatTableDataSource(this.movies);
       this.dataSource.paginator = this.paginator;
@@ -83,7 +76,6 @@ export class MoviesSharedService {
     search.genres = this.selectedGenreList;
     search.yearFrom = this.selectedYearFrom;
     search.yearTo = this.selectedYearTo;
-    search.user = this.plexUserName;
     this.moviesService.searchMovies(search).subscribe((data: Media[]) => {
       this.movies = data;
       this.dataSource = new MatTableDataSource(this.movies);

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {PlexUsersListComponent} from './plex-users-list.component';
 
-import { PlexComponent } from './plex.component';
 
-describe('PlexComponent', () => {
-  let component: PlexComponent;
-  let fixture: ComponentFixture<PlexComponent>;
+describe('PlexUsersListComponent', () => {
+  let component: PlexUsersListComponent;
+  let fixture: ComponentFixture<PlexUsersListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PlexComponent ]
+      declarations: [ PlexUsersListComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PlexComponent);
+    fixture = TestBed.createComponent(PlexUsersListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

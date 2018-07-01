@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UsersSettingsComponent } from './users-settings.component';
+import { PlexSettingsComponent } from './plex-settings.component';
 
 describe('PlexSettingsComponent', () => {
-  let component: UsersSettingsComponent;
-  let fixture: ComponentFixture<UsersSettingsComponent>;
+  let component: PlexSettingsComponent;
+  let fixture: ComponentFixture<PlexSettingsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UsersSettingsComponent ]
+      declarations: [ PlexSettingsComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(UsersSettingsComponent);
+    fixture = TestBed.createComponent(PlexSettingsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

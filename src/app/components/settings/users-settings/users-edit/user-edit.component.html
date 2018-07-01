@@ -89,27 +89,15 @@
                name="ownership">
         <br>
       </mat-form-field>
-
-
-      <mat-form-field class="user-edit-full-width">
-        <input matInput placeholder="Plex email" [(ngModel)]="user.plexLogin"
-               formControlName="emailCheck"
-               name="plexLogin">
-        <mat-error *ngIf="emailFormControl.hasError('emailOptional')">
-           Plex email should be under the form <strong>xxxxxxxx@yyyyyy.zzz</strong>
-        </mat-error>
-      </mat-form-field>
       <br>
-      <mat-form-field class="user-edit-full-width">
-        <input matInput placeholder="Plex password" name="plexPassword" [ngModelOptions]="{standalone: true}"
-               [(ngModel)]="user.plexPassword"
-               [type]="hidePlexPassword ? 'password' : 'text'">
-
-        <mat-icon matSuffix (click)="hidePlexPassword = !hidePlexPassword">{{hidePlexPassword ? 'visibility' :
-          'visibility_off'}}
-        </mat-icon>
+      <mat-form-field>
+        <mat-select [disabled]=!isAdmin() placeholder="Plex User" [(ngModel)]="user.plexUser" name="plexuser" [ngModelOptions]="{standalone: true}">
+          <mat-option *ngFor="let plexUserSelection of selections" [value]="plexUserSelection.value" >
+            {{plexUserSelection.viewValue}}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
-      <button mat-button type="button" (click)="testPlexLogin()">Test Plex</button>
+
       <br>
 
       <mat-slide-toggle
