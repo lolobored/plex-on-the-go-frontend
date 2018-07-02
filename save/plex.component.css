@@ -1,8 +1,0 @@
-.plex-container {
-  display: flex;
-  flex-direction: column;
-}
-
-.plex-container > * {
-  width: 100%;
-}

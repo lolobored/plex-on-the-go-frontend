@@ -1,0 +1,53 @@
+<mat-card>
+  <div class="example-header">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+
+  </div>
+
+  <div class="example-container mat-elevation-z8">
+
+    <mat-table [dataSource]="tvshowsSharedService.dataSource" matSort>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="title">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Name</mat-header-cell>
+        <mat-cell *matCellDef="let tvshow"> {{tvshow.title}}</mat-cell>
+      </ng-container>
+
+      <!-- Role Column -->
+      <ng-container matColumnDef="year">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Year</mat-header-cell>
+        <mat-cell *matCellDef="let tvshow"> {{tvshow.year}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="watched">
+        <mat-header-cell *matHeaderCellDef> Watched</mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <mat-icon *ngIf="!row.watched">visibility_off</mat-icon>
+          <mat-icon *ngIf="row.watched">visibility</mat-icon>
+        </mat-cell>
+      </ng-container>
+
+      <!-- Plex Token Column -->
+      <ng-container matColumnDef="convert">
+        <mat-header-cell *matHeaderCellDef> Convert</mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <div class="button-row docs-buttons-hide-small">
+            <button mat-raised-button [disabled]=row.converted color="primary" (click)="this.tvshowsSharedService.addConvert(row)"><mat-icon>library_add</mat-icon>Add</button>
+          </div>
+          <div class="button-row docs-buttons-show-small" >
+            <button mat-mini-fab color="primary" [disabled]=row.converted (click)="this.tvshowsSharedService.addConvert(row)"><mat-icon>library_add</mat-icon></button>
+          </div>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;">
+      </mat-row>
+    </mat-table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div>
+</mat-card>
