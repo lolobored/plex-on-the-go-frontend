@@ -8,11 +8,20 @@
     </button>
 
     <ul [@bodyExpansion]="_getExpandedState('show')" id="panel-show">
-      <li *ngFor="let show of shows">
+      <li >
       <mat-slide-toggle
         class="example-margin"
         color="primary"
         [checked]="true"
+        (change)="toggleAll($event)">
+        None / All
+      </mat-slide-toggle>
+      </li>
+      <li *ngFor="let show of shows">
+      <mat-slide-toggle
+        class="example-margin"
+        color="primary"
+        [checked]="checkedTvShows[show]"
         (change)="toggleTvShow(show, $event)">
         {{ show }}
       </mat-slide-toggle>

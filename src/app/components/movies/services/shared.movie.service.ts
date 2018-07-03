@@ -50,6 +50,21 @@ export class MoviesSharedService {
     this.searchMovies();
   }
 
+  removeAllGenres() {
+    this.selectedGenreList = [];
+    this.searchMovies();
+  }
+
+  addAllGenres(genres: string[]) {
+    // ensure it is empty
+    this.selectedGenreList = [];
+
+    for (const index in genres) {
+      this.selectedGenreList.push(genres[index]);
+    }
+    this.searchMovies();
+  }
+
   changeSelectedYearFrom(newYearFrom: number) {
     this.selectedYearFrom = newYearFrom;
     this.searchMovies();

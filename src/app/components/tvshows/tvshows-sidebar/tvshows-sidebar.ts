@@ -1,11 +1,19 @@
 import {
-  Component, Input, NgZone, ViewEncapsulation, ViewChild, OnInit, NgModule, trigger, state,
-  animate, transition, style, OnDestroy
+  animate,
+  Component,
+  Input,
+  NgModule,
+  NgZone,
+  OnDestroy,
+  OnInit,
+  state,
+  style,
+  transition,
+  trigger,
+  ViewChild,
+  ViewEncapsulation
 } from '@angular/core';
-import {
-  MatSidenav, MatSidenavModule, MatIconModule, MatCheckboxModule, MatSlideToggleModule, MatTableDataSource,
-  MatSliderModule
-} from '@angular/material';
+import {MatCheckboxModule, MatIconModule, MatSidenav, MatSidenavModule, MatSliderModule, MatSlideToggleModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ActivatedRoute, Params, Router, RouterModule} from '@angular/router';
 import {CommonModule} from '@angular/common';
@@ -68,6 +76,9 @@ export class TvShowsBar implements OnInit, OnDestroy {
 
   @Input() params: Observable<Params>;
   expansions = {};
+
+  checkedTvShows = {};
+
   private _onDestroy = new Subject<void>();
 
   shows: string[];
@@ -76,17 +87,18 @@ export class TvShowsBar implements OnInit, OnDestroy {
               private tvshowsSharedService: TvShowsSharedService) {
     // retrieving the list of genre
     this.tvshowRestService.getTvShowsList()
-      .subscribe( (data: string[]) => {
+      .subscribe((data: string[]) => {
         this.shows = data;
         this.tvshowsSharedService.selectedTvShowList = data.slice();
+        for (const index in data) {
+          this.checkedTvShows[data[index]] = true;
+        }
       });
-
   }
 
   ngOnInit() {
 
   }
-
 
 
   ngOnDestroy() {
@@ -102,7 +114,7 @@ export class TvShowsBar implements OnInit, OnDestroy {
 
   /** Toggles the expanded state */
   toggleExpand(category: string) {
-  if (typeof this.expansions[category] === 'undefined') {
+    if (typeof this.expansions[category] === 'undefined') {
       this.expansions[category] = false;
     }
     this.expansions[category] = !this.expansions[category];
@@ -114,12 +126,31 @@ export class TvShowsBar implements OnInit, OnDestroy {
   }
 
   toggleTvShow(tvshow, event) {
-    if (event.checked === false){
+    if (event.checked === false) {
       this.tvshowsSharedService.removeTvShow(tvshow);
+      this.checkedTvShows[tvshow] = false;
     } else {
       this.tvshowsSharedService.addTvShow(tvshow);
+      this.checkedTvShows[tvshow] = true;
     }
   }
+
+  toggleAll(event) {
+
+    if (event.checked === false) {
+      for (const show in this.checkedTvShows) {
+        this.checkedTvShows[show] = false;
+      }
+      this.tvshowsSharedService.removeAllTvShows();
+    }
+    else {
+      for (const show in this.checkedTvShows) {
+        this.checkedTvShows[show] = true;
+      }
+      this.tvshowsSharedService.addAllTvShows(this.shows);
+    }
+  }
+}
 
 }
 
@@ -141,4 +172,5 @@ export class TvShowsBar implements OnInit, OnDestroy {
   declarations: [TvShowsSidebar, TvShowsBar],
   providers: [TvShowsRestService, TvShowsSharedService],
 })
-export class TvShowsSidebarModule {}
+export class TvShowsSidebarModule {
+}

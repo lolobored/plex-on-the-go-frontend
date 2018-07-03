@@ -67,6 +67,9 @@ export class MoviesSidebar implements OnInit {
 export class MoviesBar implements OnInit, OnDestroy {
 
   @Input() params: Observable<Params>;
+
+  checkedGenre = {};
+
   expansions = {};
   private _onDestroy = new Subject<void>();
   category: string;
@@ -88,6 +91,9 @@ export class MoviesBar implements OnInit, OnDestroy {
       .subscribe( (data: string[]) => {
         this.genres = data;
         this.moviesSharedService.selectedGenreList = data.slice();
+        for (const index in data) {
+          this.checkedGenre[data[index]] = true;
+        }
       });
     // retrieving the list of genre
     this.movieRestService.getYears()
@@ -137,8 +143,26 @@ export class MoviesBar implements OnInit, OnDestroy {
   toggleGenre(genre, event) {
     if (event.checked === false){
       this.moviesSharedService.removeGenre(genre);
+      this.checkedGenre[genre] = false;
     } else {
       this.moviesSharedService.addGenre(genre);
+      this.checkedGenre[genre] = true;
+    }
+  }
+
+  toggleAll(event) {
+
+    if (event.checked === false) {
+      for (const genre in this.checkedGenre) {
+        this.checkedGenre[genre] = false;
+      }
+      this.moviesSharedService.removeAllGenres();
+    }
+    else {
+      for (const genre in this.checkedGenre) {
+        this.checkedGenre[genre] = true;
+      }
+      this.moviesSharedService.addAllGenres(this.genres);
     }
   }
 
