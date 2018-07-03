@@ -20,8 +20,7 @@ export class TvShowsRestService {
   constructor(private http: HttpClient) {}
 
   private tvshowsUrl = environment.apiUrl + '/tvshows';
-  private genreUrl = environment.apiUrl + '/tvshows/genre';
-  private yearUrl = environment.apiUrl + '/tvshows/year';
+  private listTvShowsUrl = environment.apiUrl + '/tvshows/list';
   private searchUrl = environment.apiUrl + '/tvshows/search';
 
   private addTvShow = environment.apiUrl + '/conversions/add';
@@ -31,12 +30,8 @@ export class TvShowsRestService {
     return this.http.get(this.tvshowsUrl);
   }
 
-  public getGenre() {
-    return this.http.get(this.genreUrl);
-  }
-
-  public getYears() {
-    return this.http.get(this.yearUrl);
+  public getTvShowsList() {
+    return this.http.get(this.listTvShowsUrl);
   }
 
   public searchTvShows(search: Search){

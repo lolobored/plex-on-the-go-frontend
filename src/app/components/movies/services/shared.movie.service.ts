@@ -61,12 +61,14 @@ export class MoviesSharedService {
   }
 
   getAllMovies() {
-    this.moviesService.getMovies().subscribe((data: Media[]) => {
-      this.movies = data;
-      this.dataSource = new MatTableDataSource(this.movies);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-    });
+    if (this.movies === undefined) {
+      this.moviesService.getMovies().subscribe((data: Media[]) => {
+        this.movies = data;
+        this.dataSource = new MatTableDataSource(this.movies);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      });
+    }
   }
 
 

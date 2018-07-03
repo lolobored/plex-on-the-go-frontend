@@ -61,6 +61,9 @@ import {PlexSettingsComponent} from './components/settings/plex-settings/plex-se
 import {PlexUserService} from './components/settings/plex-settings/plex-settings.service';
 import {PlexUsersListComponent} from './components/settings/plex-settings/plex-users-list/plex-users-list.component';
 import {PlexEditComponent} from './components/settings/plex-settings/plex-edit/plex-edit.component';
+import {TvShowsComponent} from './components/tvshows/tvshows.component';
+import {TvShowsListComponent} from './components/tvshows/tvshows-list/tvshows-list.component';
+import {TvShowsSidebarModule} from './components/tvshows/tvshows-sidebar/tvshows-sidebar';
 
 @NgModule({
   declarations: [
@@ -76,6 +79,8 @@ import {PlexEditComponent} from './components/settings/plex-settings/plex-edit/p
     UserListComponent,
     PlexUsersListComponent,
     LdapSettingsComponent,
+    TvShowsComponent,
+    TvShowsListComponent,
     MoviesComponent,
     MoviesListComponent,
     PlexSettingsComponent,
@@ -116,6 +121,7 @@ import {PlexEditComponent} from './components/settings/plex-settings/plex-edit/p
     ThemePickerModule,
     SettingsSidenavModule,
     MoviesSidebarModule,
+    TvShowsSidebarModule,
     KeycloakAngularModule
   ],
   providers: [StyleManager,

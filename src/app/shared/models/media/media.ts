@@ -21,7 +21,7 @@ export class Media {
   // tvshows only
   show: Show;
   season: Season;
-  episode: number;
+  episodeNumber: number;
 
 
 }

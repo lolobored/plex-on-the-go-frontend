@@ -1,13 +1,9 @@
-export class Search {
+import {Media} from '../media/media';
 
-  title: string;
+export class Search extends Media{
+
   yearFrom: number;
   yearTo: number;
-  rating: string;
-  genres: string[];
-  directors: string[];
-  actors: string[];
-  writers: string[];
-
-
+  showTitles: string[];
+  
 }

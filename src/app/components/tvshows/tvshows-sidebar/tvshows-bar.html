@@ -1,56 +1,22 @@
 <div class="docs-component-viewer-nav">
   <div class="docs-component-viewer-nav-content">
-    <button (click)="toggleExpand('genre')"
-            [attr.aria-label]="'genre, section toggle'"
-            [attr.aria-controls]="'panel-genre'"
-            [attr.aria-expanded]="getExpanded('genre')">
-      Genres
+    <button (click)="toggleExpand('show')"
+            [attr.aria-label]="'show, section toggle'"
+            [attr.aria-controls]="'panel-show'"
+            [attr.aria-expanded]="getExpanded('show')">
+      TV Shows
     </button>
 
-    <ul [@bodyExpansion]="_getExpandedState('genre')" id="panel-genre">
-      <li *ngFor="let genre of genres">
+    <ul [@bodyExpansion]="_getExpandedState('show')" id="panel-show">
+      <li *ngFor="let show of shows">
       <mat-slide-toggle
         class="example-margin"
         color="primary"
         [checked]="true"
-        (change)="toggleGenre(genre, $event)">
-        {{ genre }}
+        (change)="toggleTvShow(show, $event)">
+        {{ show }}
       </mat-slide-toggle>
         </li>
     </ul>
-    <hr>
-    <button (click)="toggleExpand('year')"
-            [attr.aria-label]="'year, section toggle'"
-            [attr.aria-controls]="'panel-year'"
-            [attr.aria-expanded]="getExpanded('year')">
-      Years
-    </button>
-    <ul [@bodyExpansion]="_getExpandedState('year')" id="panel-year">
-      <li>
-        From
-       </li>
-      <mat-slider
-        class="example-margin"
-        [max]="maxFrom"
-        [min]="minFrom"
-        color="primary"
-        [thumb-label]="true"
-        [(ngModel)]="valueFrom"
-        (change)="toggleYearFrom(valueFrom, $event)">
-      </mat-slider>
-      <li>
-        To
-      </li>
-      <mat-slider
-        class="example-margin"
-        [max]="maxTo"
-        [min]="minTo"
-        color="primary"
-        [thumb-label]="true"
-        [(ngModel)]="valueTo"
-        (change)="toggleYearTo(valueTo, $event)">
-      </mat-slider>
-    </ul>
-    <hr>
   </div>
 </div>

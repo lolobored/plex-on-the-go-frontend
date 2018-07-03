@@ -23,7 +23,7 @@ import {User} from '../../../shared/models/user/user';
   styleUrls: ['./tvshows-list.component.css']
 })
 export class TvShowsListComponent implements OnInit {
-  displayedColumns = ['title', 'year', 'watched', 'convert'];
+  displayedColumns = ['show', 'season', 'episode', 'title', 'watched', 'convert'];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;

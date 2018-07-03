@@ -14,6 +14,8 @@ import {SyncComponent} from './components/sync/sync.component';
 import {PlexSettingsComponent} from './components/settings/plex-settings/plex-settings.component';
 import {PlexUsersListComponent} from './components/settings/plex-settings/plex-users-list/plex-users-list.component';
 import {PlexEditComponent} from './components/settings/plex-settings/plex-edit/plex-edit.component';
+import {TvShowsComponent} from './components/tvshows/tvshows.component';
+import {TvShowsListComponent} from './components/tvshows/tvshows-list/tvshows-list.component';
 
 const routes: Routes = [
   {
@@ -27,8 +29,14 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'tvshows', component: MoviesComponent,
-    canActivate: [AppAuthGuard]
+    path: 'tvshows', component: TvShowsComponent,
+    canActivate: [AppAuthGuard],
+    children: [
+      {
+        path: '', component: TvShowsListComponent,
+        canActivate: [AppAuthGuard]
+      }
+    ]
   },
   {
     path: 'downloads', component: MoviesComponent,

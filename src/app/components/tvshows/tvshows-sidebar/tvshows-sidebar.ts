@@ -69,39 +69,18 @@ export class TvShowsBar implements OnInit, OnDestroy {
   @Input() params: Observable<Params>;
   expansions = {};
   private _onDestroy = new Subject<void>();
-  category: string;
-  genres: string[];
-  years: number[];
 
-  // sliders
-  maxFrom = 100;
-  minFrom = 0;
-  maxTo = 100;
-  minTo = 0;
-  valueFrom = 0;
-  valueTo = 0;
+  shows: string[];
 
   constructor(private _router: Router, private tvshowRestService: TvShowsRestService,
               private tvshowsSharedService: TvShowsSharedService) {
     // retrieving the list of genre
-    this.tvshowRestService.getGenre()
+    this.tvshowRestService.getTvShowsList()
       .subscribe( (data: string[]) => {
-        this.genres = data;
-        this.tvshowsSharedService.selectedGenreList = data.slice();
+        this.shows = data;
+        this.tvshowsSharedService.selectedTvShowList = data.slice();
       });
-    // retrieving the list of genre
-    this.tvshowRestService.getYears()
-      .subscribe( (data: number[]) => {
-        this.years = data;
-        this.minFrom = data[0];
-        this.minTo = data[0];
-        tvshowsSharedService.selectedYearFrom = data[0];
-        this.valueFrom = data[0];
-        this.maxFrom = data[data.length - 1];
-        this.maxTo = data[data.length - 1];
-        this.valueTo = data[data.length - 1];
-        tvshowsSharedService.selectedYearTo = data[data.length - 1];
-      });
+
   }
 
   ngOnInit() {
@@ -134,21 +113,12 @@ export class TvShowsBar implements OnInit, OnDestroy {
     return this.expansions[category];
   }
 
-  toggleGenre(genre, event) {
+  toggleTvShow(tvshow, event) {
     if (event.checked === false){
-      this.tvshowsSharedService.removeGenre(genre);
+      this.tvshowsSharedService.removeTvShow(tvshow);
     } else {
-      this.tvshowsSharedService.addGenre(genre);
+      this.tvshowsSharedService.addTvShow(tvshow);
     }
-  }
-
-  toggleYearFrom(year, event) {
-    this.minTo = year;
-    this.tvshowsSharedService.changeSelectedYearFrom(this.valueFrom);
-  }
-  toggleYearTo(year, event) {
-    this.maxFrom = year;
-    this.tvshowsSharedService.changeSelectedYearTo(this.valueTo);
   }
 
 }

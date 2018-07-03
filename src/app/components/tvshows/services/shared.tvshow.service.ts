@@ -30,33 +30,23 @@ export class TvShowsSharedService {
 
   }
 
-  selectedGenreList: string[];
+  selectedTvShowList: string[];
   selectedYearFrom: number;
   selectedYearTo: number;
   tvshows: Media[];
 
-  addGenre(newGenre: string) {
-    this.selectedGenreList.push(newGenre);
+  addTvShow(tvshow: string) {
+    this.selectedTvShowList.push(tvshow);
     this.searchTvShows();
   }
 
-  removeGenre(formerGenre: string) {
-    for (let i = this.selectedGenreList.length - 1; i >= 0; i--) {
-      if (this.selectedGenreList[i] === formerGenre) {
-        this.selectedGenreList.splice(i, 1);
+  removeTvShow(tvShow: string) {
+    for (let i = this.selectedTvShowList.length - 1; i >= 0; i--) {
+      if (this.selectedTvShowList[i] === tvShow) {
+        this.selectedTvShowList.splice(i, 1);
         break;
       }
     }
-    this.searchTvShows();
-  }
-
-  changeSelectedYearFrom(newYearFrom: number) {
-    this.selectedYearFrom = newYearFrom;
-    this.searchTvShows();
-  }
-
-  changeSelectedYearTo(newYearTo: number) {
-    this.selectedYearTo = newYearTo;
     this.searchTvShows();
   }
 
@@ -73,7 +63,9 @@ export class TvShowsSharedService {
   searchTvShows() {
     let search: Search;
     search = new Search();
-    search.genres = this.selectedGenreList;
+    search = new Search();
+    search.showTitles = this.selectedTvShowList;
+
     search.yearFrom = this.selectedYearFrom;
     search.yearTo = this.selectedYearTo;
     this.tvshowsService.searchTvShows(search).subscribe((data: Media[]) => {
