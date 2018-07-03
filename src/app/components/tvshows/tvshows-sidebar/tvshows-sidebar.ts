@@ -150,7 +150,6 @@ export class TvShowsBar implements OnInit, OnDestroy {
       this.tvshowsSharedService.addAllTvShows(this.shows);
     }
   }
-}
 
 }
 
