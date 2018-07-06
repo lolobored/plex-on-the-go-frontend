@@ -7,7 +7,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing.module';
 import {HttpClientModule} from '@angular/common/http';
-
+import {CdkTableModule} from '@angular/cdk/table';
+import {CdkTreeModule} from '@angular/cdk/tree';
 
 import {
   MatPaginatorModule,
@@ -19,6 +20,7 @@ import {
   MatMenuModule,
   MatToolbarModule,
   MatCardModule,
+  MatProgressSpinnerModule,
   MatButtonModule,
   MatTabsModule,
   MatExpansionModule,
@@ -95,6 +97,7 @@ import {TvShowsSidebarModule} from './components/tvshows/tvshows-sidebar/tvshows
     MatTableModule,
     MatInputModule,
     MatSlideToggleModule,
+    MatProgressSpinnerModule
     MatSliderModule,
     MatGridListModule,
     MatIconModule,

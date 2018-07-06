@@ -11,7 +11,8 @@ import {Media} from '../../../shared/models/media/media';
 import {MoviesRestService} from '../services/movies.rest.service';
 import {MoviesSharedService} from '../services/shared.movie.service';
 import {KeycloakService} from 'keycloak-angular';
-import {User} from '../../../shared/models/user/user';
+import { merge } from 'rxjs/observable/merge';
+import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 
 @NgModule({
   providers: [MoviesRestService, MoviesSharedService]
@@ -28,16 +29,46 @@ export class MoviesListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
+
+  resultsLength = 0;
+  isLoadingResults = true;
+  isRateLimitReached = false;
+  data: Media[] = [];
+
+
   constructor(public moviesSharedService: MoviesSharedService, private keycloakService: KeycloakService) {
-    this.moviesSharedService.getAllMovies();
+
   }
 
   ngOnInit() {
+    this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
 
-    this.moviesSharedService.dataSource = new MatTableDataSource(this.moviesSharedService.movies);
-    this.moviesSharedService.paginator = this.paginator;
-    this.moviesSharedService.sort = this.sort;
+    merge(this.sort.sortChange, this.paginator.page)
+      .pipe(
+        switchMap(() => {
+          this.isLoadingResults = true;
+          return this.moviesSharedService.getAllMoviesObservable();
+           // this.sort.active, this.sort.direction, this.paginator.pageIndex);
+        }),
+        map(data => {
+          // Flip flag to show that loading has finished.
+          this.isLoadingResults = false;
+          this.isRateLimitReached = false;
+          this.resultsLength = 10000;
+
+          return data;
+        })
+      ).subscribe(data =>{
+
+     this.data= data;
+      this.moviesSharedService.paginator = this.paginator;
+      this.moviesSharedService.sort = this.sort;
+
+      }
+    );
   }
+
+
 
   /**
    * Set the paginator and sort after the view init since this component will

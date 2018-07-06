@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
-import {Observable} from 'rxjs/Observable';
 import {ErrorObservable} from 'rxjs/observable/ErrorObservable';
 import {IError} from 'protractor/built/exitCodes';
 import 'rxjs/add/operator/map'
@@ -9,6 +8,8 @@ import {Search} from '../../../shared/models/search/search';
 import {environment} from '../../../../environments/properties';
 import {Media} from '../../../shared/models/media/media';
 import {PlexUser} from '../../../shared/models/plexusers/plexuser';
+
+import { Observable } from 'rxjs/Observable';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -27,8 +28,8 @@ export class MoviesRestService {
   private addMovie = environment.apiUrl + '/conversions/add';
 
 
-  public getMovies() {
-    return this.http.get(this.moviesUrl);
+  public getMovies(): Observable<Media[]> {
+    return this.http.get<Media[]>(this.moviesUrl);
   }
 
   public getGenre() {

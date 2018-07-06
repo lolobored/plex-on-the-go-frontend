@@ -5,6 +5,8 @@ import {Search} from '../../../shared/models/search/search';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {KeycloakService} from 'keycloak-angular';
 import {UsersService} from '../../settings/users-settings/users-settings.service';
+import { Observable } from 'rxjs/Observable';
+
 
 
 @NgModule({
@@ -21,12 +23,7 @@ export class MoviesSharedService {
 
 
   constructor(private moviesService: MoviesRestService, private keycloakService: KeycloakService) {
-      this.moviesService.getMovies().subscribe((data: Media[]) => {
-        this.movies = data;
-        this.dataSource = new MatTableDataSource(this.movies);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-      });
+
 
   }
 
@@ -73,6 +70,10 @@ export class MoviesSharedService {
   changeSelectedYearTo(newYearTo: number) {
     this.selectedYearTo = newYearTo;
     this.searchMovies();
+  }
+
+  getAllMoviesObservable(search: Search): Observable<Media[]> {
+    return this.moviesService.search(search);
   }
 
   getAllMovies() {

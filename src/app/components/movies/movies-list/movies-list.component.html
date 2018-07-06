@@ -1,4 +1,5 @@
 <mat-card>
+
   <div class="example-header">
     <mat-form-field>
       <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
@@ -6,9 +7,9 @@
 
   </div>
 
-  <div class="example-container mat-elevation-z8">
+  <div class="movies-list-container mat-elevation-z8">
 
-    <mat-table [dataSource]="moviesSharedService.dataSource" matSort>
+    <mat-table [dataSource]="data" matSort>
 
       <!-- Name Column -->
       <ng-container matColumnDef="title">
@@ -48,6 +49,6 @@
       </mat-row>
     </mat-table>
 
-    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    <mat-paginator [length]="10000" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
   </div>
 </mat-card>

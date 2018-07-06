@@ -1,4 +1,4 @@
-.example-container {
+.movies-list-container {
   display: flex;
   flex-direction: column;
   min-width: 300px;
@@ -9,7 +9,7 @@
   max-height: 500px;
 }
 
-.example-button-row {
+.movies-list-button-row {
   display: flex;
   align-items: left;
   justify-content: space-around;
