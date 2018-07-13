@@ -4,12 +4,13 @@ import {ErrorObservable} from 'rxjs/observable/ErrorObservable';
 import {IError} from 'protractor/built/exitCodes';
 import 'rxjs/add/operator/map'
 import {Subscriber} from 'rxjs/Subscriber';
-import {Search} from '../../../shared/models/search/search';
+import {SearchRequest} from '../../../shared/models/search/searchRequest';
 import {environment} from '../../../../environments/properties';
 import {Media} from '../../../shared/models/media/media';
 import {PlexUser} from '../../../shared/models/plexusers/plexuser';
 
 import { Observable } from 'rxjs/Observable';
+import {SearchResponse} from '../../../shared/models/search/SearchResponse';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -27,11 +28,6 @@ export class MoviesRestService {
 
   private addMovie = environment.apiUrl + '/conversions/add';
 
-
-  public getMovies(): Observable<Media[]> {
-    return this.http.get<Media[]>(this.moviesUrl);
-  }
-
   public getGenre() {
     return this.http.get(this.genreUrl);
   }
@@ -40,8 +36,8 @@ export class MoviesRestService {
     return this.http.get(this.yearUrl);
   }
 
-  public searchMovies(search: Search){
-    return this.http.post(this.searchUrl, search, httpOptions);
+  public searchMovies(search: SearchRequest): Observable<SearchResponse> {
+    return this.http.post<SearchResponse>(this.searchUrl, search, httpOptions);
   }
 
   public addConversion(media: Media){

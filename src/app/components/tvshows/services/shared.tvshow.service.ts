@@ -1,7 +1,7 @@
 import {Injectable, NgModule} from '@angular/core';
 import {Media} from '../../../shared/models/media/media';
 import {TvShowsRestService} from './tvshows.rest.service';
-import {Search} from '../../../shared/models/search/search';
+import {SearchRequest} from '../../../shared/models/search/searchRequest';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {KeycloakService} from 'keycloak-angular';
 import {UsersService} from '../../settings/users-settings/users-settings.service';
@@ -76,8 +76,8 @@ export class TvShowsSharedService {
 
 
   searchTvShows() {
-    let search: Search;
-    search = new Search();
+    let search: SearchRequest;
+    search = new SearchRequest();
     search.showTitles = this.selectedTvShowList;
 
     search.yearFrom = this.selectedYearFrom;

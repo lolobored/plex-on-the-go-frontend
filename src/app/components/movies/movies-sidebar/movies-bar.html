@@ -17,11 +17,11 @@
           None / All
         </mat-slide-toggle>
       </li>
-      <li *ngFor="let genre of genres">
+      <li *ngFor="let genre of moviesSharedService.genres">
       <mat-slide-toggle
         class="example-margin"
         color="primary"
-        [checked]="checkedGenre[genre]"
+        [checked]="moviesSharedService.checkedGenre[genre]"
         (change)="toggleGenre(genre, $event)">
         {{ genre }}
       </mat-slide-toggle>
@@ -40,11 +40,11 @@
        </li>
       <mat-slider
         class="example-margin"
-        [max]="maxFrom"
-        [min]="minFrom"
+        [max]="moviesSharedService.maxFrom"
+        [min]="moviesSharedService.minFrom"
         color="primary"
         [thumb-label]="true"
-        [(ngModel)]="valueFrom"
+        [(ngModel)]="moviesSharedService.valueFrom"
         (change)="toggleYearFrom(valueFrom, $event)">
       </mat-slider>
       <li>
@@ -52,11 +52,11 @@
       </li>
       <mat-slider
         class="example-margin"
-        [max]="maxTo"
-        [min]="minTo"
+        [max]="moviesSharedService.maxTo"
+        [min]="moviesSharedService.minTo"
         color="primary"
         [thumb-label]="true"
-        [(ngModel)]="valueTo"
+        [(ngModel)]="moviesSharedService.valueTo"
         (change)="toggleYearTo(valueTo, $event)">
       </mat-slider>
     </ul>

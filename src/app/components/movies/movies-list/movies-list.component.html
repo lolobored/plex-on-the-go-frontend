@@ -9,7 +9,7 @@
 
   <div class="movies-list-container mat-elevation-z8">
 
-    <mat-table [dataSource]="data" matSort>
+    <mat-table [dataSource]="moviesSharedService.movies" matSort>
 
       <!-- Name Column -->
       <ng-container matColumnDef="title">
@@ -49,6 +49,10 @@
       </mat-row>
     </mat-table>
 
-    <mat-paginator [length]="10000" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    <mat-paginator [length]="moviesSharedService.totalResult"
+                   [pageSize]="moviesSharedService.pageSize"
+                   [pageSizeOptions]="pageSizeOptions"
+                   (page)="moviesSharedService.pageEvent = changePage($event)">
+    </mat-paginator>
   </div>
 </mat-card>

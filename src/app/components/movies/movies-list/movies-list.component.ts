@@ -1,18 +1,11 @@
 import {Component, NgModule, OnInit, ViewChild} from '@angular/core';
-import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
-import {DataSource} from '@angular/cdk/collections';
-import {
-  MatPaginator,
-  MatSort,
-  MatTableDataSource,
-} from '@angular/material';
-import {Media} from '../../../shared/models/media/media';
+import {MatPaginator, MatSort, PageEvent,} from '@angular/material';
 import {MoviesRestService} from '../services/movies.rest.service';
 import {MoviesSharedService} from '../services/shared.movie.service';
 import {KeycloakService} from 'keycloak-angular';
-import { merge } from 'rxjs/observable/merge';
-import { catchError, map, startWith, switchMap } from 'rxjs/operators';
+import {merge} from 'rxjs/observable/merge';
+import {map, switchMap} from 'rxjs/operators';
 
 @NgModule({
   providers: [MoviesRestService, MoviesSharedService]
@@ -29,11 +22,7 @@ export class MoviesListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-
-  resultsLength = 0;
-  isLoadingResults = true;
-  isRateLimitReached = false;
-  data: Media[] = [];
+  pageSizeOptions: number[] = [5, 10, 25, 100];
 
 
   constructor(public moviesSharedService: MoviesSharedService, private keycloakService: KeycloakService) {
@@ -41,33 +30,32 @@ export class MoviesListComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
+    //this.paginator.page.subscribe(() => this.paginator.pageIndex = 0);
+
 
     merge(this.sort.sortChange, this.paginator.page)
       .pipe(
         switchMap(() => {
-          this.isLoadingResults = true;
-          return this.moviesSharedService.getAllMoviesObservable();
-           // this.sort.active, this.sort.direction, this.paginator.pageIndex);
+
+          return this.moviesSharedService.searchMovies();
+
         }),
-        map(data => {
-          // Flip flag to show that loading has finished.
-          this.isLoadingResults = false;
-          this.isRateLimitReached = false;
-          this.resultsLength = 10000;
+        map(searchResponse => {
+          this.moviesSharedService.totalResult = searchResponse.total;
 
-          return data;
+          return searchResponse;
         })
-      ).subscribe(data =>{
+      ).subscribe(searchResponse => {
 
-     this.data= data;
-      this.moviesSharedService.paginator = this.paginator;
-      this.moviesSharedService.sort = this.sort;
+        this.moviesSharedService.movies = searchResponse.results;
+        this.moviesSharedService.paginator = this.paginator;
+        this.moviesSharedService.sort = this.sort;
 
       }
     );
   }
-
 
 
   /**
@@ -75,15 +63,28 @@ export class MoviesListComponent implements OnInit {
    * be able to query its view for the initialized paginator and sort.
    */
   ngAfterViewInit() {
-    this.moviesSharedService.dataSource = new MatTableDataSource(this.moviesSharedService.movies);
     this.moviesSharedService.paginator = this.paginator;
     this.moviesSharedService.sort = this.sort;
   }
 
   applyFilter(filterValue: string) {
-    filterValue = filterValue.trim(); // Remove whitespace
-    filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
-    this.moviesSharedService.dataSource.filter = filterValue;
+    // filterValue = filterValue.trim(); // Remove whitespace
+    // filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
+    //this.moviesSharedService.dataSource.filter = filterValue;
   }
 
+  changePage(event: PageEvent) {
+    this.moviesSharedService.pageNumber= event.pageIndex;
+    this.moviesSharedService.pageSize = event.pageSize;
+    this.moviesSharedService.searchMovies().subscribe(searchResponse => {
+
+      this.moviesSharedService.movies = searchResponse.results;
+      this.moviesSharedService.paginator = this.paginator;
+      this.moviesSharedService.sort = this.sort;
+      this.moviesSharedService.totalResult = searchResponse.total;
+
+
+    });
+    return event;
+  }
 }

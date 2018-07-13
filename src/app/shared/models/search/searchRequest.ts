@@ -1,9 +1,11 @@
 import {Media} from '../media/media';
 
-export class Search extends Media{
+export class SearchRequest extends Media{
 
+  resultPerPage: number;
+  pageNumber: number;
   yearFrom: number;
   yearTo: number;
   showTitles: string[];
-  
+
 }

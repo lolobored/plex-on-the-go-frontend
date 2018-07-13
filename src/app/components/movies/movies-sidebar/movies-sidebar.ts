@@ -68,46 +68,12 @@ export class MoviesBar implements OnInit, OnDestroy {
 
   @Input() params: Observable<Params>;
 
-  checkedGenre = {};
 
   expansions = {};
   private _onDestroy = new Subject<void>();
-  category: string;
-  genres: string[];
-  years: number[];
-
-  // sliders
-  maxFrom = 100;
-  minFrom = 0;
-  maxTo = 100;
-  minTo = 0;
-  valueFrom = 0;
-  valueTo = 0;
 
   constructor(private _router: Router, private movieRestService: MoviesRestService,
               private moviesSharedService: MoviesSharedService) {
-    // retrieving the list of genre
-    this.movieRestService.getGenre()
-      .subscribe( (data: string[]) => {
-        this.genres = data;
-        this.moviesSharedService.selectedGenreList = data.slice();
-        for (const index in data) {
-          this.checkedGenre[data[index]] = true;
-        }
-      });
-    // retrieving the list of genre
-    this.movieRestService.getYears()
-      .subscribe( (data: number[]) => {
-        this.years = data;
-        this.minFrom = data[0];
-        this.minTo = data[0];
-        moviesSharedService.selectedYearFrom = data[0];
-        this.valueFrom = data[0];
-        this.maxFrom = data[data.length - 1];
-        this.maxTo = data[data.length - 1];
-        this.valueTo = data[data.length - 1];
-        moviesSharedService.selectedYearTo = data[data.length - 1];
-      });
   }
 
   ngOnInit() {
@@ -143,36 +109,36 @@ export class MoviesBar implements OnInit, OnDestroy {
   toggleGenre(genre, event) {
     if (event.checked === false){
       this.moviesSharedService.removeGenre(genre);
-      this.checkedGenre[genre] = false;
+      this.moviesSharedService.checkedGenre[genre] = false;
     } else {
       this.moviesSharedService.addGenre(genre);
-      this.checkedGenre[genre] = true;
+      this.moviesSharedService.checkedGenre[genre] = true;
     }
   }
 
   toggleAll(event) {
 
     if (event.checked === false) {
-      for (const genre in this.checkedGenre) {
-        this.checkedGenre[genre] = false;
+      for (const genre in this.moviesSharedService.checkedGenre) {
+        this.moviesSharedService.checkedGenre[genre] = false;
       }
       this.moviesSharedService.removeAllGenres();
     }
     else {
-      for (const genre in this.checkedGenre) {
-        this.checkedGenre[genre] = true;
+      for (const genre in this.moviesSharedService.checkedGenre) {
+        this.moviesSharedService.checkedGenre[genre] = true;
       }
-      this.moviesSharedService.addAllGenres(this.genres);
+      this.moviesSharedService.addAllGenres(this.moviesSharedService.genres);
     }
   }
 
   toggleYearFrom(year, event) {
-    this.minTo = year;
-    this.moviesSharedService.changeSelectedYearFrom(this.valueFrom);
+    this.moviesSharedService.minTo = year;
+    this.moviesSharedService.changeSelectedYearFrom(this.moviesSharedService.valueFrom);
   }
   toggleYearTo(year, event) {
-    this.maxFrom = year;
-    this.moviesSharedService.changeSelectedYearTo(this.valueTo);
+    this.moviesSharedService.maxFrom = year;
+    this.moviesSharedService.changeSelectedYearTo(this.moviesSharedService.valueTo);
   }
 
 }

@@ -15,7 +15,7 @@ export class ElasticsearchComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._componentPageTitle.title = 'Settings - Elastic Search';
+    this._componentPageTitle.title = 'Settings - Elastic SearchRequest';
   }
 
   getErrorMessage() {

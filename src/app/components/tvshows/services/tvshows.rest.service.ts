@@ -5,7 +5,7 @@ import {ErrorObservable} from 'rxjs/observable/ErrorObservable';
 import {IError} from 'protractor/built/exitCodes';
 import 'rxjs/add/operator/map'
 import {Subscriber} from 'rxjs/Subscriber';
-import {Search} from '../../../shared/models/search/search';
+import {SearchRequest} from '../../../shared/models/search/searchRequest';
 import {environment} from '../../../../environments/properties';
 import {Media} from '../../../shared/models/media/media';
 import {PlexUser} from '../../../shared/models/plexusers/plexuser';
@@ -34,7 +34,7 @@ export class TvShowsRestService {
     return this.http.get(this.listTvShowsUrl);
   }
 
-  public searchTvShows(search: Search){
+  public searchTvShows(search: SearchRequest){
     return this.http.post(this.searchUrl, search, httpOptions);
   }
 
